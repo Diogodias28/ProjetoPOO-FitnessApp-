@@ -1,89 +1,60 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+
+import Model.Atividade;
+import Model.Utilizador;
 
 public class FitnessApp {
     private static List<Utilizador> utilizadores = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        exibirMensagemBoasVindas();
-        exibirMenuInicial();
+        run();
     }
 
-    private static void exibirMensagemBoasVindas() {
-        System.out.println("Bem-vindo à nossa aplicação de Fitness!");
-        System.out.println("Aqui poderá realizar planos de treino, verificar estatísticas e competir com outros utilizadores.");
-        System.out.println("Boa sorte!\n");
-    }
-
-    private static void exibirMenuInicial() {
-        System.out.println("Para iniciar, escolha uma opção:");
-        System.out.println("1. Login");
-        System.out.println("2. Criar conta");
-
-        int opcao = scanner.nextInt();
-        scanner.nextLine(); // Consumir a quebra de linha pendente
-
-        if (opcao == 1) {
-            fazerLogin();
-        } else if (opcao == 2) {
-            criarConta();
-        } else {
-            System.out.println("Opção inválida. Por favor, escolha novamente.\n");
-            exibirMenuInicial();
-        }
-    }
-
-    private static void fazerLogin() {
-        System.out.println("Por favor, insira seu Email:");
-        String email = scanner.nextLine();
-
-        System.out.println("Por favor, insira sua Palavra-passe:");
-        String senha = scanner.nextLine();
-
-        Utilizador utilizador = encontrarUtilizadorPorEmail(email);
-        if (utilizador != null && utilizador.getPassword().equals(senha)) {
-            System.out.println("Login bem-sucedido!");
-            // Lógica para a página principal após o login
-        } else {
-            System.out.println("Email ou Palavra-passe incorretos. Por favor, tente novamente.\n");
-            exibirMenuInicial();
-        }
-    }
-
-    private static void criarConta() {
-        System.out.println("Por favor, insira seu Email:");
-        String email = scanner.nextLine();
-
-        // Verificar se o email já está em uso
-        if (encontrarUtilizadorPorEmail(email) != null) {
-            System.out.println("O email já está em uso. Por favor, insira um email diferente.\n");
-            criarConta();
+    public void exportarAtividadesParaCSV(String email) {
+        // Buscar o utilizador com base no email fornecido
+        Utilizador utilizador = getUtilizadorbyemail(email);
+        if (utilizador == null) {
+            System.out.println("Utilizador não encontrado.");
             return;
         }
 
-        System.out.println("Por favor, insira sua Palavra-passe:");
-        String senha = scanner.nextLine();
+        Map<String, Atividade> atividades = utilizador.getAtividades();
 
-        System.out.println("Por favor, insira seu nome:");
-        String nome = scanner.nextLine();
+        // Verificar se o utilizador possui atividades
+        if (atividades.isEmpty()) {
+            System.out.println("Este utilizador não possui atividades.");
+            return;
+        }
 
-        // Resto da lógica para ler outras informações do usuário e criar um novo Utilizador
+        String nomeArquivo = "atividades_" + email + ".csv";
 
-        Utilizador novoUtilizador = new Utilizador(email, senha, nome, ...);
-        utilizadores.add(novoUtilizador);
+        try (FileWriter writer = new FileWriter(nomeArquivo)) {
+            // Escrever o cabeçalho do arquivo CSV
+            writer.append("Codigo,Descricao,Data,Duracao\n");
 
-        System.out.println("Conta criada com sucesso!\n");
-        exibirMenuInicial();
+            // Escrever cada atividade no arquivo CSV
+            for (Map.Entry<String, Atividade> entry : atividades.entrySet()) {
+                Atividade atividade = entry.getValue();
+                writer.append(atividade.getCodigo()).append(",");
+                writer.append(atividade.getDescricao()).append(",");
+                writer.append(atividade.getData().toString()).append(",");
+                writer.append(String.valueOf(atividade.getDuracao())).append("\n");
+            }
+
+            System.out.println("As atividades foram exportadas para o arquivo: " + nomeArquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao exportar as atividades para o arquivo CSV: " + e.getMessage());
+        }
     }
 
-    private static Utilizador encontrarUtilizadorPorEmail(String email) {
-        for (Utilizador utilizador : utilizadores) {
-            if (utilizador.getEmail().equals(email)) {
-                return utilizador;
-            }
-        }
+    private Utilizador getUtilizadorbyemail(String email) {
+        // Implemente a lógica para encontrar o utilizador com base no email
         return null;
     }
 }

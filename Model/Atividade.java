@@ -1,14 +1,15 @@
+package Model;
 import java.time.LocalDate;
 
 
-public abstract class Atividades {
+public abstract class Atividade {
     private String codigo;
     private String descricao;
     private LocalDate data;
     private int duracao;
     private Utilizador user;
 
-    public Atividades() {
+    public Atividade() {
         this.codigo = "";
         this.descricao = "";
         this.data = LocalDate.EPOCH;
@@ -16,14 +17,14 @@ public abstract class Atividades {
         this.user = new Utilizador();
     }
 
-    public Atividades(String codigo, String descricao, LocalDate data, int duracao) {
+    public Atividade(String codigo, String descricao, LocalDate data, int duracao) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.data = data;
         this.duracao = duracao;
     }
 
-    public Atividades(Atividades outro){
+    public Atividade(Atividade outro){
         this.codigo = outro.getCodigo();
         this.descricao = outro.getDescricao();
         this.data = outro.getData();
@@ -80,12 +81,11 @@ public abstract class Atividades {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Atividades Atividades = (Atividades) o;
+        Atividade Atividades = (Atividade) o;
         return this.duracao == Atividades.getDuracao()
                 && this.codigo.equals(Atividades.getCodigo())
                 && this.descricao.equals(Atividades.getDescricao())
@@ -94,5 +94,5 @@ public abstract class Atividades {
 
 
     public abstract double calorias();
-    public  abstract  Atividades clone( );
+    public  abstract  Atividade clone( );
 }

@@ -1,9 +1,10 @@
+package View;
 import java.util.Scanner;
 
-public class Interface {
+public class MenuInicial {
     private Scanner scanner;
 
-    public Interface() {
+    public MenuInicial() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -25,23 +26,5 @@ public class Interface {
     }
 
     // Métodos para ler dados do usuário durante o processo de login ou criação de conta
-    // ...
-
-    public void exibirPaginaPrincipal() {
-        System.out.println("\nBem-vindo à sua página principal!");
-        System.out.println("Escolha uma opção:");
-        System.out.println("1. Iniciar nova atividade");
-        System.out.println("2. Criar plano de treino");
-        System.out.println("3. Ver as minhas estatísticas");
-        System.out.println("4. Tabelas com outros utilizadores");
-        System.out.println("5. Logout");
-    }
-
-    public int lerOpcaoPaginaPrincipal() {
-        System.out.print("Opção: ");
-        return scanner.nextInt();
-    }
-
-    // Métodos adicionais conforme necessário para interações específicas do usuário
     // ...
 }
