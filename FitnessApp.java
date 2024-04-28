@@ -7,14 +7,46 @@ import java.util.Scanner;
 
 import Model.Atividade;
 import Model.Utilizador;
+import View.NewMenu;
 
 public class FitnessApp {
     private static List<Utilizador> utilizadores = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
+    private NewMenu PaginaInicial, MenuPrincipal;
 
     public static void main(String[] args) {
-        run();
+        new FitnessApp().run();
     }
+
+    private void run (){
+        do {
+            PaginaInicial.run();
+            switch(PaginaInicial.readOption()){
+                case 1: ;
+                case 2: ;
+                case 3: ;
+            }
+        } while (PaginaInicial.readOption() != 0);
+        try {
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void exportarAtividadesParaCSV(String email) {
         // Buscar o utilizador com base no email fornecido
