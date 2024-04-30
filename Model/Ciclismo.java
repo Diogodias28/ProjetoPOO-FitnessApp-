@@ -2,13 +2,13 @@ package Model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Ciclismo extends Atividade{
+public class Ciclismo extends AltaIntensidade{
     private double distancia;
     private double altimetria;
     private String percurso;
 
     public Ciclismo(){
-        super();
+        super("", "", LocalDate.EPOCH, 0);
         this.distancia = 0;
         this.altimetria = 0;
         this.percurso = "";
@@ -22,7 +22,7 @@ public class Ciclismo extends Atividade{
     }
 
     public Ciclismo(Ciclismo outro) {
-        super(outro);
+        super("", "", LocalDate.EPOCH, 0);
         this.distancia = outro.getDistancia();
         this.altimetria = outro.getAltimetria();
         this.percurso = outro.getPercurso();

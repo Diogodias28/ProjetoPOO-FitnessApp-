@@ -3,13 +3,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 //import java.time.temporal.Temporal;
 
-public class Corrida extends Atividade{
+public class Corrida extends AltaIntensidade{
     private double distancia;
     private double altimetria;
     private String percurso;
 
     public Corrida(){
-        super();
+        super("", "", LocalDate.EPOCH, 0);
         this.distancia = 0;
         this.altimetria = 0;
         this.percurso = "";
@@ -23,7 +23,7 @@ public class Corrida extends Atividade{
     }
 
     public Corrida(Corrida outro) {
-        super(outro);
+        super("", "", LocalDate.EPOCH, 0);
         this.distancia = outro.getDistancia();
         this.altimetria = outro.getAltimetria();
         this.percurso = outro.getPercurso();
