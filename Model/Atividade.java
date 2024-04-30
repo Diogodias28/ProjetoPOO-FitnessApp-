@@ -12,7 +12,7 @@ public abstract class Atividade {
     public Atividade() {
         this.codigo = "";
         this.descricao = "";
-        this.data = LocalDate.EPOCH;
+        this.data = LocalDate.ofEpochDay(0);
         this.duracao = 0;
         this.user = new Utilizador();
     }

@@ -1,37 +1,44 @@
 package Model;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.Map;
 
-public class Utilizador {
+public abstract class Utilizador {
+    private int codigoUtilizador;
+    private String nome;
+    private String morada;
     private String email;
     private String password;
-    private String nome;
     private Genero genero;
     private double altura;
     private double peso;
     private LocalDate data_nascimento;
-    private String desporto_favorito;
     private String tipo_atleta;
+    private String desporto_favorito;
     private Map<String, Atividade> atividades;
+    private double frequenciaCardiacaMedia;
 
     public Utilizador(){
+        this.codigoUtilizador = 0;
+        this.morada = "";
         this.email = "";
         this.password = "";
         this.nome = "nome";
         this.genero = Genero.Outro;
         this.altura = 0;
         this.peso = 0;
-        this.data_nascimento = LocalDate.EPOCH;
+        this.data_nascimento = LocalDate.ofEpochDay(0);
         this.desporto_favorito = "";
         this.tipo_atleta = "";
         this.atividades = new HashMap<>();
+        this.frequenciaCardiacaMedia = 0;
     }
-    public Utilizador(String email, String password, String nome, Genero genero, double altura,
-                      double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta,
-                      Map<String, Atividade> atividades) {
+
+    public Utilizador(int codigoUtilizador, String morada, String email, String password, String nome, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
+        this.codigoUtilizador = codigoUtilizador;
+        this.morada = morada;
         this.email = email;
         this.password = password;
         this.nome = nome;
@@ -42,10 +49,12 @@ public class Utilizador {
         this.desporto_favorito = desporto_favorito;
         this.tipo_atleta = tipo_atleta;
         this.atividades = atividades.entrySet().stream().collect(Collectors.toMap(k->k.getKey(), v-> v.getValue().clone()));
+        this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
     }
 
-    public Utilizador(String email, String password, String nome, Genero genero, double altura,
-                      double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
+    public Utilizador(int codigoUtilizador, String morada, String email, String password, String nome, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, double frequenciaCardiacaMedia) {
+        this.codigoUtilizador = codigoUtilizador;
+        this.morada = morada;
         this.email = email;
         this.password = password;
         this.nome = nome;
@@ -55,9 +64,13 @@ public class Utilizador {
         this.data_nascimento = data_nascimento;
         this.desporto_favorito = desporto_favorito;
         this.tipo_atleta = tipo_atleta;
+        this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
         this.atividades = new HashMap<>();
     }
+
     public Utilizador(Utilizador outro){
+        this.codigoUtilizador = outro.getCodigoUtilizador();
+        this.morada = outro.getMorada();
         this.email = outro.getEmail();
         this.password = outro.getPassword();
         this.nome = outro.getNome();
@@ -68,6 +81,31 @@ public class Utilizador {
         this.desporto_favorito = outro.getDesporto_favorito();
         this.tipo_atleta = outro.getTipo_atleta();
         this.atividades = outro.getAtividades();
+        this.frequenciaCardiacaMedia = getFrequenciaCardiacaMedia();
+    }
+
+    public int getCodigoUtilizador(){
+        return codigoUtilizador;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public String getMorada(){
+        return morada;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public double getPeso(){
+        return peso;
+    }
+
+    public double getFrequenciaCardiacaMedia(){
+        return frequenciaCardiacaMedia;
     }
 
     public Map<String, Atividade> getAtividades() {
@@ -76,10 +114,6 @@ public class Utilizador {
 
     public void setAtividades(Map<String, Atividade> atividades) {
         this.atividades =  atividades.entrySet().stream().collect(Collectors.toMap(k->k.getKey(), v-> v.getValue().clone()));
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setEmail(String email) {
@@ -92,10 +126,6 @@ public class Utilizador {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public void setNome(String nome) {
@@ -116,10 +146,6 @@ public class Utilizador {
 
     public void setAltura(double altura) {
         this.altura = altura;
-    }
-
-    public double getPeso() {
-        return peso;
     }
 
     public void setPeso(double peso) {
@@ -160,15 +186,7 @@ public class Utilizador {
         }
         return atividades.get(cod).clone();
     }
-    
-    /**
-     * Esta implementação de equals é diferente daquela que temos feito, no que respeita
-     * às comparações das várias variáveis de instância.
-     * 
-     * Esta é a forma que o IntelliJ utiliza e serve para ilustrar a utilização de Object.equals
-     * 
-     */
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -200,8 +218,9 @@ public class Utilizador {
                 ", tipo_atleta=" + tipo_atleta +
                 '}';
     }
+    //public Utilizador clone(){
+    //    return new Utilizador(this);
+    //}
 
-    public Utilizador clone(){
-        return new Utilizador(this);
-    }
+    public abstract double calcularFatorCalorias();
 }
