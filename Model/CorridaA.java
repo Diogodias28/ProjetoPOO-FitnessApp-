@@ -23,7 +23,7 @@ public class CorridaA extends AltaIntensidade{
     }
 
     public CorridaA(CorridaA outro) {
-        super("", "", LocalDate.EPOCH, 0);
+        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.distancia = outro.getDistancia();
         this.altimetria = outro.getAltimetria();
         this.percurso = outro.getPercurso();

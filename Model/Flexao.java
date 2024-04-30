@@ -2,12 +2,12 @@ package Model;
 import java.time.LocalDate;
 //import java.time.temporal.ChronoUnit;
 
-public class Flexao extends Atividade{
+public class Flexao extends BaixaIntensidade{
     private double rep;
     private String tipo;
 
     public Flexao(){
-        super();
+        super("", "", LocalDate.EPOCH, 0);
         this.rep = 0;
         this.tipo = "";
     }
@@ -18,8 +18,8 @@ public class Flexao extends Atividade{
         this.tipo = tipo;
     }
 
-    public Flexao(Abdominal outro) {
-        super(outro);
+    public Flexao(Flexao outro) {
+        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.rep = outro.getRep();
         this.tipo = outro.getTipo();
     }
@@ -48,7 +48,7 @@ public class Flexao extends Atividade{
 
     @Override
     public Atividade clone() {
-        return new Abdominal(this);
+        return new Flexao(this);
     }
 
     @Override
@@ -65,9 +65,9 @@ public class Flexao extends Atividade{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Abdominal Abdominal = (Abdominal) o;
-        return Double.compare(Abdominal.getRep(), getRep()) == 0
-                && this.getTipo().equals(Abdominal.getTipo());
+        Flexao Flexao = (Flexao) o;
+        return Double.compare(Flexao.getRep(), getRep()) == 0
+                && this.getTipo().equals(Flexao.getTipo());
     }
 
 }

@@ -2,7 +2,7 @@ package Model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Canoagem extends Atividade{
+public class Canoagem extends AltaIntensidade{
     private double direcao;
     private double velvento;
     private double distancia;
@@ -10,7 +10,7 @@ public class Canoagem extends Atividade{
     private String embarcacao;
 
     public Canoagem(){
-        super();
+        super("","", LocalDate.EPOCH, 0);
         this.direcao = 0;
         this.velvento = 0;
         this.distancia = 0;
@@ -28,7 +28,7 @@ public class Canoagem extends Atividade{
     }
 
     public Canoagem(Canoagem outro) {
-        super(outro);
+        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.direcao = outro.getDirecao();
         this.velvento = outro.getVelvento();
         this.distancia = outro.getDistancia();

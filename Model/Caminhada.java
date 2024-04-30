@@ -3,13 +3,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 //import java.time.temporal.Temporal;
 
-public class Caminhada extends Atividade{
+public class Caminhada extends BaixaIntensidade{
     private double distancia;
     private double altimetria;
     private String percurso;
 
     public Caminhada(){
-        super();
+        super("", "", LocalDate.EPOCH, 0);
         this.distancia = 0;
         this.altimetria = 0;
         this.percurso = "";
@@ -23,7 +23,7 @@ public class Caminhada extends Atividade{
     }
 
     public Caminhada(Caminhada outro) {
-        super(outro);
+        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.distancia = outro.getDistancia();
         this.altimetria = outro.getAltimetria();
         this.percurso = outro.getPercurso();

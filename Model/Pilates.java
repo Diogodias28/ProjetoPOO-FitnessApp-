@@ -1,24 +1,23 @@
 package Model;
 import java.time.LocalDate;
-//import java.time.temporal.ChronoUnit;
 
-public class Abdominal extends BaixaIntensidade{
+public class Pilates extends MediaIntensidade{
     private double rep;
     private String tipo;
 
-    public Abdominal(){
+    public Pilates(){
         super("", "", LocalDate.EPOCH, 0);
         this.rep = 0;
         this.tipo = "";
     }
 
-    public Abdominal(String codigo, String descricao, LocalDate data, int duracao, double rep, String tipo) {
+    public Pilates(String codigo, String descricao, LocalDate data, int duracao, double rep, String tipo) {
         super(codigo, descricao, data, duracao);
         this.rep = rep;
         this.tipo = tipo;
     }
 
-    public Abdominal(Abdominal outro) {
+    public Pilates(Pilates outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.rep = outro.getRep();
         this.tipo = outro.getTipo();
@@ -48,12 +47,12 @@ public class Abdominal extends BaixaIntensidade{
 
     @Override
     public Atividade clone() {
-        return new Abdominal(this);
+        return new Pilates(this);
     }
 
     @Override
     public String toString() {
-        return "Abdominal{" +
+        return "Pilates{" +
                 super.toString()+
                 "rep=" + rep +
                 ", tipo='" + tipo + '\'' +
@@ -65,9 +64,9 @@ public class Abdominal extends BaixaIntensidade{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Abdominal Abdominal = (Abdominal) o;
-        return Double.compare(Abdominal.getRep(), getRep()) == 0
-                && this.getTipo().equals(Abdominal.getTipo());
+        Pilates Pilates = (Pilates) o;
+        return Double.compare(Pilates.getRep(), getRep()) == 0
+                && this.getTipo().equals(Pilates.getTipo());
     }
 
 }
