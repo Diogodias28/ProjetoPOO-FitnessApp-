@@ -88,3 +88,43 @@ public class CorridaA extends AltaIntensidade{
     }
 
 }
+
+
+/*public interface AtividadeComDistanciaEAltimetria {
+    double getDistancia();
+    double getAltimetria();
+    String getPercurso();
+}
+
+public class CorridaA extends AltaIntensidade implements AtividadeComDistanciaEAltimetria {
+    private double distancia;
+    private double altimetria;
+    private String percurso;
+
+    public CorridaA(String codigo, String descricao, LocalDate data, int duracao, double distancia, double altimetria, String percurso) {
+        super(codigo, descricao, data, duracao);
+        this.distancia = distancia;
+        this.altimetria = altimetria;
+        this.percurso = percurso;
+    }
+
+    // Implementação dos métodos da interface AtividadeComDistanciaEAltimetria
+
+    @Override
+    public double getDistancia() {
+        return distancia;
+    }
+
+    @Override
+    public double getAltimetria() {
+        return altimetria;
+    }
+
+    @Override
+    public String getPercurso() {
+        return percurso;
+    }
+
+    // Implementação dos métodos abstratos ou adicionais de AltaIntensidade
+}
+ */

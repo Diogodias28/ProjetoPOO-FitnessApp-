@@ -2,7 +2,7 @@ package Model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Ciclismo extends AltaIntensidade{
+public class Ciclismo extends BaixaIntensidade{
     private double distancia;
     private double altimetria;
     private String percurso;

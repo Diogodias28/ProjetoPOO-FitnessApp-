@@ -2,7 +2,7 @@ package Model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Canoagem extends AltaIntensidade{
+public class Canoagem extends BaixaIntensidade{
     private double direcao;
     private double velvento;
     private double distancia;
