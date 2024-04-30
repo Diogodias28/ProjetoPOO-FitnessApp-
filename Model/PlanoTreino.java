@@ -1,6 +1,5 @@
-package User;
+package Model;
 import java.util.ArrayList;
-import Model.Atividade;
 
 class PlanoTreino {
     private ArrayList<Atividade> atividades;
