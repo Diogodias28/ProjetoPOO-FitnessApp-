@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 //import java.time.temporal.Temporal;
 
-public class CorridaA extends AltaIntensidade{
+public class CorridaA extends AltaIntensidade implements DistanciaeAltimetria{
     private double distancia;
     private double altimetria;
     private String percurso;

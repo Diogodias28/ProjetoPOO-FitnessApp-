@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 //import java.time.temporal.Temporal;
 
-public class CorridaM extends MediaIntensidade{
+public class CorridaM extends MediaIntensidade implements DistanciaeAltimetria{
     private double distancia;
     private double altimetria;
     private String percurso;

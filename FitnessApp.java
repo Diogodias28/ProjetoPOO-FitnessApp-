@@ -15,10 +15,10 @@ public class FitnessApp {
     private NewMenu PaginaInicial, MenuPrincipal;
 
     public static void main(String[] args) {
-        new FitnessApp().run();
+        new FitnessDelegate().run();
     }
 
-    private void run (){
+    /*private void run (){
         do {
             PaginaInicial.run();
             switch(PaginaInicial.readOption()){
@@ -33,8 +33,8 @@ public class FitnessApp {
     }
 
 
-
-
+/* */
+//todos os métodos importantes: setuser, adduser, getallatividades...
 
 
 

@@ -2,7 +2,7 @@ package Model;
 import java.time.LocalDate;
 //import java.time.temporal.ChronoUnit;
 
-public class Flexao extends BaixaIntensidade{
+public class Flexao extends BaixaIntensidade implements Reps{
     private double rep;
     private String tipo;
 
