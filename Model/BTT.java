@@ -1,23 +1,23 @@
 package Model;
 import java.time.LocalDate;
 
-public class Pilates extends MediaIntensidade{
+public class BTT extends DistanciaeAltimetria{ //temos de substituir cenas
     private double rep;
     private String tipo;
 
-    public Pilates(){
+    public BTT(){
         super("", "", LocalDate.EPOCH, 0);
         this.rep = 0;
         this.tipo = "";
     }
 
-    public Pilates(String codigo, String descricao, LocalDate data, int duracao, double rep, String tipo) {
+    public BTT(String codigo, String descricao, LocalDate data, int duracao, double rep, String tipo) {
         super(codigo, descricao, data, duracao);
         this.rep = rep;
         this.tipo = tipo;
     }
 
-    public Pilates(Pilates outro) {
+    public BTT(BTT outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.rep = outro.getRep();
         this.tipo = outro.getTipo();
@@ -47,12 +47,12 @@ public class Pilates extends MediaIntensidade{
 
     @Override
     public Atividade clone() {
-        return new Pilates(this);
+        return new BTT(this);
     }
 
     @Override
     public String toString() {
-        return "Pilates{" +
+        return "BTT{" +
                 super.toString()+
                 "rep=" + rep +
                 ", tipo='" + tipo + '\'' +
@@ -64,9 +64,9 @@ public class Pilates extends MediaIntensidade{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Pilates Pilates = (Pilates) o;
-        return Double.compare(Pilates.getRep(), getRep()) == 0
-                && this.getTipo().equals(Pilates.getTipo());
+        BTT BTT = (BTT) o;
+        return Double.compare(BTT.getRep(), getRep()) == 0
+                && this.getTipo().equals(BTT.getTipo());
     }
 
 }

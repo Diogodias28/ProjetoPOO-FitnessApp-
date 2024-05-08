@@ -1,7 +1,7 @@
 package Model;
 import java.time.LocalDate;
 
-public class Hidroginastica extends MediaIntensidade{
+public class Hidroginastica extends MediaIntensidade{ //temos de escolher outra
     private double rep;
     private String tipo;
 

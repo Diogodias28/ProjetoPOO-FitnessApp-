@@ -2,18 +2,18 @@ package Model;
 import java.time.LocalDate;
 //import java.time.temporal.ChronoUnit;
 
-public class Flexao extends BaixaIntensidade implements Reps{
+public class Flexao extends Reps{
     private double rep;
     private String tipo;
 
     public Flexao(){
-        super("", "", LocalDate.EPOCH, 0);
+        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL);
         this.rep = 0;
         this.tipo = "";
     }
 
-    public Flexao(String codigo, String descricao, LocalDate data, int duracao, double rep, String tipo) {
-        super(codigo, descricao, data, duracao);
+    public Flexao(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, double rep, String tipo) {
+        super(codigo, descricao, data, duracao, dificuldade);
         this.rep = rep;
         this.tipo = tipo;
     }

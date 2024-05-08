@@ -2,25 +2,35 @@ package Model;
 
 import java.time.LocalDate;
 
-public class Distancia extends Atividade {
-    private double distancia;
+public class RepsPesos extends Atividade {
+    private int reps;
+    private int peso;
 
-    public Distancia(){
+    public RepsPesos(){
         super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL);
-        this.distancia = 0;
+        this.reps = 0;
     }
 
-    public Distancia(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, double distancia) {
+    public RepsPesos(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
         super(codigo, descricao, data, duracao, dificuldade);
-        this.distancia = distancia;
+        this.reps = reps;
+        this.peso = peso;
     }
 
-    public double getdistancia() {
-        return distancia;
+    public int getreps() {
+        return reps;
     }
 
-    public void setDistancia(double distancia) {
-        this.distancia = distancia;
+    public void setreps(int reps) {
+        this.reps = reps;
+    }
+
+    public int getpeso() {
+        return peso;
+    }
+
+    public void setpeso(int peso) {
+        this.peso = peso;
     }
 
     @Override
@@ -32,7 +42,7 @@ public class Distancia extends Atividade {
 
     private double calcularCaloriasBase(Utilizador utilizador) {
         
-        double calorias = distancia *getDuracao() * (utilizador.getPeso()/10);
+        double calorias = reps * peso *getDuracao() * (utilizador.getPeso()/10);
 
         return calorias;
     }
@@ -43,6 +53,6 @@ public class Distancia extends Atividade {
     }
 
     public Atividade clone() {
-        return new Distancia(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), distancia);
+        return new RepsPesos(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), reps, peso);
     }
 }

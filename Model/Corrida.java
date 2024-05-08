@@ -3,26 +3,26 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 //import java.time.temporal.Temporal;
 
-public class CorridaM extends MediaIntensidade implements DistanciaeAltimetria{
+public class Corrida extends DistanciaeAltimetria{
     private double distancia;
     private double altimetria;
     private String percurso;
 
-    public CorridaM(){
+    public Corrida(){
         super("", "", LocalDate.EPOCH, 0);
         this.distancia = 0;
         this.altimetria = 0;
         this.percurso = "";
     }
 
-    public CorridaM(String codigo, String descricao, LocalDate data, int duracao, double distancia, double altimetria, String percurso) {
+    public Corrida(String codigo, String descricao, LocalDate data, int duracao, double distancia, double altimetria, String percurso) {
         super(codigo, descricao, data, duracao);
         this.distancia = distancia;
         this.altimetria = altimetria;
         this.percurso = percurso;
     }
 
-    public CorridaM(CorridaM outro) {
+    public Corrida(Corrida outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
         this.distancia = outro.getDistancia();
         this.altimetria = outro.getAltimetria();
@@ -63,12 +63,12 @@ public class CorridaM extends MediaIntensidade implements DistanciaeAltimetria{
 
     @Override
     public Atividade clone() {
-        return new CorridaM(this);
+        return new Corrida(this);
     }
 
     @Override
     public String toString() {
-        return "CorridaM{" +
+        return "Corrida{" +
                 super.toString()+
                 "distancia=" + distancia +
                 ", altimetria=" + altimetria +
@@ -81,10 +81,10 @@ public class CorridaM extends MediaIntensidade implements DistanciaeAltimetria{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CorridaM CorridaM = (CorridaM) o;
-        return Double.compare(CorridaM.getDistancia(), getDistancia()) == 0
-                && Double.compare(CorridaM.getAltimetria(), getAltimetria()) == 0
-                && this.getPercurso().equals(CorridaM.getPercurso());
+        Corrida Corrida = (Corrida) o;
+        return Double.compare(Corrida.getDistancia(), getDistancia()) == 0
+                && Double.compare(Corrida.getAltimetria(), getAltimetria()) == 0
+                && this.getPercurso().equals(Corrida.getPercurso());
     }
 
 }

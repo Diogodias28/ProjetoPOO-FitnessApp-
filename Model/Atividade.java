@@ -8,6 +8,7 @@ public abstract class Atividade {
     private LocalDate data;
     private int duracao;
     private Utilizador user;
+    private Dificuldade dificuldade;
 
     public Atividade() {
         this.codigo = "";
@@ -15,13 +16,15 @@ public abstract class Atividade {
         this.data = LocalDate.ofEpochDay(0);
         this.duracao = 0;
         this.user = new Utilizador();
+        this.dificuldade= Dificuldade.FACIL;
     }
 
-    public Atividade(String codigo, String descricao, LocalDate data, int duracao) {
+    public Atividade(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.data = data;
         this.duracao = duracao;
+        this.dificuldade= dificuldade;
     }
 
     public Atividade(Atividade outro){
@@ -29,6 +32,7 @@ public abstract class Atividade {
         this.descricao = outro.getDescricao();
         this.data = outro.getData();
         this.duracao = outro.getDuracao();
+        this.dificuldade= outro.getDificuldade();
     }
     public String getCodigo() {
         return codigo;
@@ -62,6 +66,14 @@ public abstract class Atividade {
         this.duracao = duracao;
     }
 
+    public Dificuldade getDificuldade() {
+        return dificuldade;
+    }
+
+    public void setDificuldade(Dificuldade dificuldade) {
+        this.dificuldade = dificuldade;
+    }
+
     @Override
     public String toString() {
         return "Atividades{" +
@@ -69,6 +81,7 @@ public abstract class Atividade {
                 ", descricao='" + descricao + '\'' +
                 ", data=" + data +
                 ", duracao=" + duracao +
+                ", dificuldade='" + dificuldade + '\'' +
                 '}';
     }
 
@@ -89,10 +102,11 @@ public abstract class Atividade {
         return this.duracao == Atividades.getDuracao()
                 && this.codigo.equals(Atividades.getCodigo())
                 && this.descricao.equals(Atividades.getDescricao())
-                && this.data.equals(Atividades.getData());
+                && this.data.equals(Atividades.getData())
+                && this.dificuldade.equals(Atividades.getDificuldade());
     }
 
 
-    public abstract double calorias();
+    public abstract double calorias(Utilizador utilizador);
     public  abstract  Atividade clone();
 }

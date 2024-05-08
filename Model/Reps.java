@@ -1,5 +1,48 @@
 package Model;
 
-public interface Reps {
-    
+import java.time.LocalDate;
+
+public class Reps extends Atividade {
+    private int reps;
+
+    public Reps(){
+        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL);
+        this.reps = 0;
+    }
+
+    public Reps(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
+        super(codigo, descricao, data, duracao, dificuldade);
+        this.reps = reps;
+    }
+
+    public int getreps() {
+        return reps;
+    }
+
+    public void setreps(int reps) {
+        this.reps = reps;
+    }
+
+    @Override
+    public double calorias(Utilizador utilizador) {
+        double calorias = calcularCaloriasBase(utilizador);
+        double fatorFreq = calcularFatorFreqCardiaca(utilizador);
+        return calorias * getDificuldade().getFator() * fatorFreq;
+    }
+
+    private double calcularCaloriasBase(Utilizador utilizador) {
+        
+        double calorias = reps *getDuracao() * (utilizador.getPeso()/10);
+
+        return calorias;
+    }
+
+    private double calcularFatorFreqCardiaca(Utilizador utilizador){
+        double fator = utilizador.getFrequenciaCardiacaMedia();
+        return fator;
+    }
+
+    public Atividade clone() {
+        return new Reps(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), reps);
+    }
 }

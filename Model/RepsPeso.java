@@ -1,5 +1,5 @@
 package Model;
 
-public interface RepsPeso {
+public class RepsPeso extends Atividade {
     
 }

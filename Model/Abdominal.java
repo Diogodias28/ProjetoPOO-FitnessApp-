@@ -2,7 +2,7 @@ package Model;
 import java.time.LocalDate;
 //import java.time.temporal.ChronoUnit;
 
-public class Abdominal extends BaixaIntensidade implements Reps{
+public class Abdominal extends Reps{
     private double rep;
     private String tipo;
 
