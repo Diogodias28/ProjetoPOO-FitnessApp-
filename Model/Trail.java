@@ -1,33 +1,33 @@
 package Model;
 import java.time.LocalDate;
 
-public class Ciclismo extends DistanciaeAltimetria{
+public class Trail extends DistanciaeAltimetria{
 
-    public Ciclismo(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO, 0, 0);
+    public Trail(){
+        super("", "", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0, 0);
     }
 
-    public Ciclismo(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
+    public Trail(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
         super(codigo, descricao, data, duracao, dificuldade, distancia, altimetria);
     }
 
-    public Ciclismo(Ciclismo outro) {
+    public Trail(Trail outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
-    public double caloriasCiclismo(Utilizador utilizador) {
+    public double caloriasTrail(Utilizador utilizador) {
         double calorias = calorias(utilizador);
-        return calorias;
+        return calorias * 4/5;
     }
 
     @Override
     public Atividade clone() {
-        return new Ciclismo(this);
+        return new Trail(this);
     }
 
     @Override
     public String toString() {
-        return "Ciclismo{" +
+        return "Trail{" +
                 super.toString()+
                 '}';
     }
@@ -38,9 +38,9 @@ public class Ciclismo extends DistanciaeAltimetria{
         if (o == null || getClass() != o.getClass()) return false;
         return super.equals(0);
         /*if (!super.equals(o)) return false;
-        Ciclismo Ciclismo = (Ciclismo) o;
-        return Double.compare(Ciclismo.getRep(), getRep()) == 0
-                && this.getTipo().equals(Ciclismo.getTipo());*/
+        Trail Trail = (Trail) o;
+        return Double.compare(Trail.getRep(), getRep()) == 0
+                && this.getTipo().equals(Trail.getTipo());*/
     }
 
 }

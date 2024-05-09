@@ -1,64 +1,23 @@
 package Model;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-//import java.time.temporal.Temporal;
 
 public class Caminhada extends DistanciaeAltimetria{
-    private double distancia;
-    private double altimetria;
-    private String percurso;
 
     public Caminhada(){
-        super("", "", LocalDate.EPOCH, 0);
-        this.distancia = 0;
-        this.altimetria = 0;
-        this.percurso = "";
+        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL, 0, 0);
     }
 
-    public Caminhada(String codigo, String descricao, LocalDate data, int duracao, double distancia, double altimetria, String percurso) {
-        super(codigo, descricao, data, duracao);
-        this.distancia = distancia;
-        this.altimetria = altimetria;
-        this.percurso = percurso;
+    public Caminhada(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
+        super(codigo, descricao, data, duracao, dificuldade, distancia, altimetria);
     }
 
     public Caminhada(Caminhada outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao());
-        this.distancia = outro.getDistancia();
-        this.altimetria = outro.getAltimetria();
-        this.percurso = outro.getPercurso();
+        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
-    public double getDistancia() {
-        return distancia;
-    }
-
-    public void setDistancia(double distancia) {
-        this.distancia = distancia;
-    }
-
-    public double getAltimetria() {
-        return altimetria;
-    }
-
-    public void setAltimetria(double altimetria) {
-        this.altimetria = altimetria;
-    }
-
-    public String getPercurso() {
-        return percurso;
-    }
-
-    public void setPercurso(String percurso) {
-        this.percurso = percurso;
-    }
-
-    @Override
-    public double calorias() {
-        long idade =  ChronoUnit.YEARS.between(LocalDate.now(),
-                getUser().getData_nascimento());
-        double calorias =distancia*getUser().getPeso()*getDuracao()*idade/50;
-        return calorias;
+    public double caloriasCaminhada(Utilizador utilizador) {
+        double calorias = calorias(utilizador);
+        return calorias * 3/5;
     }
 
     @Override
@@ -68,11 +27,8 @@ public class Caminhada extends DistanciaeAltimetria{
 
     @Override
     public String toString() {
-        return "Corrida{" +
+        return "Caminhada{" +
                 super.toString()+
-                "distancia=" + distancia +
-                ", altimetria=" + altimetria +
-                ", percurso='" + percurso + '\'' +
                 '}';
     }
 
@@ -80,11 +36,11 @@ public class Caminhada extends DistanciaeAltimetria{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Caminhada corrida = (Caminhada) o;
-        return Double.compare(corrida.getDistancia(), getDistancia()) == 0
-                && Double.compare(corrida.getAltimetria(), getAltimetria()) == 0
-                && this.getPercurso().equals(corrida.getPercurso());
+        return super.equals(0);
+        /*if (!super.equals(o)) return false;
+        Caminhada Caminhada = (Caminhada) o;
+        return Double.compare(Caminhada.getRep(), getRep()) == 0
+                && this.getTipo().equals(Caminhada.getTipo());*/
     }
 
 }

@@ -2,33 +2,33 @@ package Model;
 import java.time.LocalDate;
 //import java.time.temporal.ChronoUnit;
 
-public class Flexao extends Reps{
+public class MountainClimber extends Reps{
 
-    public Flexao(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0);
+    public MountainClimber(){
+        super("", "", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
     }
 
-    public Flexao(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
+    public MountainClimber(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
         super(codigo, descricao, data, duracao, dificuldade, reps);
     }
 
-    public Flexao(Flexao outro) {
+    public MountainClimber(MountainClimber outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
-    public double calcularCaloriasFlexao (Utilizador utilizador){
+    public double calcularCaloriasMountainClimber (Utilizador utilizador){
         double calorias = calorias(utilizador);
-        return calorias;
+        return calorias*6/5;
     }
 
     @Override
     public Atividade clone() {
-        return new Flexao(this);
+        return new MountainClimber(this);
     }
 
     @Override
     public String toString() {
-        return "Flexao{" +
+        return "MountainClimber{" +
                 super.toString()+
                 '}';
     }
@@ -38,8 +38,8 @@ public class Flexao extends Reps{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         return super.equals(o);
-        /*return Double.compare(Flexao.getRep(), getRep()) == 0
-                && this.getTipo().equals(Flexao.getTipo());*/
+        /*return Double.compare(MountainClimber.getRep(), getRep()) == 0
+                && this.getTipo().equals(MountainClimber.getTipo());*/
     }
 
 }

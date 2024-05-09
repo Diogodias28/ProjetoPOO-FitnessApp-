@@ -18,6 +18,12 @@ public class DistanciaeAltimetria extends Atividade {
         this.altimetria = altimetria;
     }
 
+    public DistanciaeAltimetria(DistanciaeAltimetria outro) {
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade());
+        this.distancia = outro.getdistancia();
+        this.altimetria = outro.getaltimetria();
+    }
+
     public double getdistancia() {
         return distancia;
     }
@@ -54,6 +60,6 @@ public class DistanciaeAltimetria extends Atividade {
     }
 
     public Atividade clone() {
-        return new DistanciaeAltimetria(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), distancia, altimetria);
+        return new DistanciaeAltimetria(this);
     }
 }

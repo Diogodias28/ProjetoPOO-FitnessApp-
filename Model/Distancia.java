@@ -15,6 +15,11 @@ public class Distancia extends Atividade {
         this.distancia = distancia;
     }
 
+    public Distancia(Distancia outro) {
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade());
+        this.distancia = outro.getdistancia();
+    }
+
     public double getdistancia() {
         return distancia;
     }
@@ -43,6 +48,6 @@ public class Distancia extends Atividade {
     }
 
     public Atividade clone() {
-        return new Distancia(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), distancia);
+        return new Distancia(this);
     }
 }

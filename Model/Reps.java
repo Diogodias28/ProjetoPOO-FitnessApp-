@@ -15,6 +15,11 @@ public class Reps extends Atividade {
         this.reps = reps;
     }
 
+    public Reps(Reps outro) {
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade());
+        this.reps = outro.getreps();
+    }
+
     public int getreps() {
         return reps;
     }
@@ -43,6 +48,6 @@ public class Reps extends Atividade {
     }
 
     public Atividade clone() {
-        return new Reps(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), reps);
+        return new Reps(this);
     }
 }

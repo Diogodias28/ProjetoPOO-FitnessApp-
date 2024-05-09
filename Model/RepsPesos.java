@@ -17,6 +17,12 @@ public class RepsPesos extends Atividade {
         this.peso = peso;
     }
 
+    public RepsPesos(RepsPesos outro) {
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade());
+        this.reps= outro.getreps();
+        this.peso = outro.getpeso();
+    }
+
     public int getreps() {
         return reps;
     }
@@ -53,6 +59,6 @@ public class RepsPesos extends Atividade {
     }
 
     public Atividade clone() {
-        return new RepsPesos(getCodigo(), getDescricao(), getData(), getDuracao(), getDificuldade(), reps, peso);
+        return new RepsPesos(this);
     }
 }
