@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class BTT extends DistanciaeAltimetria{
 
     public BTT(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0, 0);
+        super("BTT", "Bicicleta todo terreno", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0, 0);
     }
 
     public BTT(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
@@ -36,11 +36,9 @@ public class BTT extends DistanciaeAltimetria{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        return super.equals(0);
-        /*if (!super.equals(o)) return false;
-        BTT BTT = (BTT) o;
-        return Double.compare(BTT.getRep(), getRep()) == 0
-                && this.getTipo().equals(BTT.getTipo());*/
+        BTT other = (BTT) o;
+        return super.equals(other) &&
+        this.caloriasBTT(null) == other.caloriasBTT(null);
     }
 
 }

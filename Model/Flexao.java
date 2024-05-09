@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Flexao extends Reps{
 
     public Flexao(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0);
+        super("Flexao", "Deite-se no chão, de barriga para baixo, Apoie as mãos no solo, abaixo dos ombros e afastadas em uma largura um pouco maior do que a dos ombros. Estenda e contraia os braços repetidamente.", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0);
     }
 
     public Flexao(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

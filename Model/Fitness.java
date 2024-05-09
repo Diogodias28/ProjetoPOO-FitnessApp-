@@ -7,8 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Fitness implements Serializable{ //este é o nosso model
@@ -24,16 +26,69 @@ public class Fitness implements Serializable{ //este é o nosso model
         return users.size();
     }
 
-    public void CriarUtilizador(){
-        
+    public void criarUtilizador(String username, Utilizador utilizador) {
+        if (!users.containsKey(username)) {
+            users.put(username, utilizador);
+        } else {
+            System.out.println("Username já utilizado. Por favor escolha um diferente.");
+        }
     }
 
-    public void AddUtilizador(){
-
+    public void addUtilizador(String username, Utilizador utilizador) {
+        users.put(username, utilizador);
     }
 
-    public void getallatividades(){
+    public Utilizador getUtilizador(String username) {
+        return users.get(username);
+    }
 
+    public List<String> getAllUsernames() {
+        return new ArrayList<>(users.keySet());
+    }
+
+    public void removerUtilizador(String username) {
+        users.remove(username);
+    }
+
+    public List<Atividade> getAllActivitiesOfUser(String username) {
+        Utilizador utilizador = users.get(username);
+        if (utilizador != null) {
+            return new ArrayList<>(utilizador.getAtividades().values());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public Atividade getAtividades(String username, int index) {
+        Utilizador utilizador = users.get(username);
+        if (utilizador != null) {
+            Map<String, Atividade> atividadesMap = utilizador.getAtividades();
+            List<Atividade> atividades = new ArrayList<>(atividadesMap.values());
+            if (index >= 0 && index < atividades.size()) {
+                return atividades.get(index);
+            }
+        }
+        return null;
+    }
+
+    public List<Atividade> getAllActivities() {
+        List<Atividade> allActivities = new ArrayList<>();
+        for (Utilizador utilizador : users.values()) {
+            Map<String, Atividade> atividadesMap = utilizador.getAtividades();
+            allActivities.addAll(atividadesMap.values());
+        }
+        return allActivities;
+    }
+
+    // Method to retrieve all usernames and their corresponding number of activities
+    public Map<String, Integer> getUserActivityCounts() {
+        Map<String, Integer> userActivityCounts = new HashMap<>();
+        for (Map.Entry<String, Utilizador> entry : users.entrySet()) {
+            String username = entry.getKey();
+            int activityCount = entry.getValue().getAtividades().size();
+            userActivityCounts.put(username, activityCount);
+        }
+        return userActivityCounts;
     }
 
     /*public void grava(String Filename){
@@ -80,24 +135,28 @@ public class Fitness implements Serializable{ //este é o nosso model
         return f;
     }
 
-    public void toCSV(String Filename, String user) throws IOException {
-            PrintWriter pw= new PrintWriter(Filename);
-            users.get(user).getAtividades()
-                .forEach(a->pw.println(a.asCSV()));
+    public void toCSV(String filename, String user) throws IOException {
+        PrintWriter pw = new PrintWriter(filename);
+        Utilizador utilizador = users.get(user);
+        if (utilizador != null) {
+            utilizador.getAtividades().entrySet().forEach(entry -> {
+                String activityId = entry.getKey();
+                Atividade activity = entry.getValue();
+                pw.println(activityId + "," + activity.toString());
+            });
+        } else {
+            System.out.println("Utilizador não encontrado.");
+        }
+        pw.close();
     }
 
-    public void asCSV(){
-
-    }
-
-    public void toCSV(String Filename){
-        try{
-            PrintWriter pw = new PrintWriter(Filename);
+    public void toCSV(String filename) {
+        try (PrintWriter pw = new PrintWriter(filename)) {
             users.values().forEach(
-                u->getAtividades()
-                .forEach(a->pw.println(a.asCSV))
+                u -> getAllActivitiesOfUser(u.getusername()).forEach(
+                    a -> pw.println(a.toString())
+                )
             );
-            pw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

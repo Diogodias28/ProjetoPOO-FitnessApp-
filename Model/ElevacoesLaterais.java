@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ElevacoesLaterais extends RepsPesos{
 
     public ElevacoesLaterais(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL,0, 0);
+        super("ElevacoesLaterais", "Faça um leve contração abdominal e mantenha braços posicionados ao lado do corpo com a palma das mãos voltadas para o corpo. Eleve os braços lateralmente, sem flexioná-los, até que as mãos atinjam a altura dos ombros.", LocalDate.EPOCH, 0, Dificuldade.FACIL,0, 0);
     }
 
     public ElevacoesLaterais(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

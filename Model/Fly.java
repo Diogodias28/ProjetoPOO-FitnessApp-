@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Fly extends RepsPesos{
 
     public Fly(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
+        super("Fly", "Pegue num peso, deite-se de barriga para cima e comece a levantar e baixar o peso repetidamente.", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
     }
 
     public Fly(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

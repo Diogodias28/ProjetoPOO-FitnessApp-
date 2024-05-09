@@ -15,7 +15,7 @@ public abstract class Atividade {
         this.descricao = "";
         this.data = LocalDate.ofEpochDay(0);
         this.duracao = 0;
-        this.user = new Utilizador();
+        this.user = getUser();
         this.dificuldade= Dificuldade.FACIL;
     }
 
@@ -76,7 +76,7 @@ public abstract class Atividade {
 
     @Override
     public String toString() {
-        return "Atividades{" +
+        return "Atividade{" +
                 "codigo='" + codigo + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", data=" + data +

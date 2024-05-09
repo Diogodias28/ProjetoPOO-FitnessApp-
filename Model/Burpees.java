@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Burpees extends Reps{
 
     public Burpees(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
+        super("Burpees", "flexão seguida de salto em extensão", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
     }
 
     public Burpees(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

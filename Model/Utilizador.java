@@ -1,13 +1,13 @@
 package Model;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.Map;
 
 public abstract class Utilizador {
     private int codigoUtilizador;
-    private String nome;
+    private String username;
     private String morada;
     private String email;
     private String password;
@@ -25,7 +25,7 @@ public abstract class Utilizador {
         this.morada = "";
         this.email = "";
         this.password = "";
-        this.nome = "nome";
+        this.username = "";
         this.genero = Genero.Outro;
         this.altura = 0;
         this.peso = 0;
@@ -36,12 +36,12 @@ public abstract class Utilizador {
         this.frequenciaCardiacaMedia = 0;
     }
 
-    public Utilizador(int codigoUtilizador, String morada, String email, String password, String nome, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
+    public Utilizador(int codigoUtilizador, String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
         this.codigoUtilizador = codigoUtilizador;
         this.morada = morada;
         this.email = email;
         this.password = password;
-        this.nome = nome;
+        this.username = username;
         this.genero = genero;
         this.altura = altura;
         this.peso = peso;
@@ -52,12 +52,12 @@ public abstract class Utilizador {
         this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
     }
 
-    public Utilizador(int codigoUtilizador, String morada, String email, String password, String nome, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, double frequenciaCardiacaMedia) {
+    public Utilizador(int codigoUtilizador, String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, double frequenciaCardiacaMedia) {
         this.codigoUtilizador = codigoUtilizador;
         this.morada = morada;
         this.email = email;
         this.password = password;
-        this.nome = nome;
+        this.username = username;
         this.genero = genero;
         this.altura = altura;
         this.peso = peso;
@@ -73,10 +73,10 @@ public abstract class Utilizador {
         this.morada = outro.getMorada();
         this.email = outro.getEmail();
         this.password = outro.getPassword();
-        this.nome = outro.getNome();
+        this.username = outro.getusername();
         this.genero = outro.getGenero();
         this.altura = outro.getAltura();
-        this.peso = outro.getAltura();
+        this.peso = outro.getPeso();
         this.data_nascimento = outro.getData_nascimento();
         this.desporto_favorito = outro.getDesporto_favorito();
         this.tipo_atleta = outro.getTipo_atleta();
@@ -88,8 +88,8 @@ public abstract class Utilizador {
         return codigoUtilizador;
     }
 
-    public String getNome(){
-        return nome;
+    public String getusername(){
+        return username;
     }
 
     public String getMorada(){
@@ -128,8 +128,8 @@ public abstract class Utilizador {
         this.password = password;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setusername(String username) {
+        this.username = username;
     }
 
     public Genero getGenero() {
@@ -196,7 +196,7 @@ public abstract class Utilizador {
                 && Double.compare(that.getPeso(), getPeso()) == 0
                 && Objects.equals(getEmail(), that.getEmail())
                 && Objects.equals(getPassword(), that.getPassword())
-                && Objects.equals(getNome(), that.getNome())
+                && Objects.equals(getusername(), that.getusername())
                 && getGenero() == that.getGenero()
                 && Objects.equals(getData_nascimento(), that.getData_nascimento())
                 && Objects.equals(getDesporto_favorito(), that.getDesporto_favorito())
@@ -209,7 +209,7 @@ public abstract class Utilizador {
         return "Utilizador{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", nome='" + nome + '\'' +
+                ", username='" + username + '\'' +
                 ", genero=" + genero +
                 ", altura=" + altura +
                 ", peso=" + peso +

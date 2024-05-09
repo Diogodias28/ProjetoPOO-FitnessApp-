@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Prancha extends Reps{
 
     public Prancha(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0);
+        super("Prancha", "Coloque-se em posição de prancha e aguente firme durante o tempo do exercício.", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0);
     }
 
     public Prancha(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

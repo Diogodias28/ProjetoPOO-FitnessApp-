@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Remada extends RepsPesos{
 
     public Remada(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
+        super("Remada", "De pé, afastar os pés na mesma largura do quadril, flexionar levemente os joelhos e inclinar um pouco o tronco para frente. Em seguida, segurar a barra com as mãos a uma distância um pouco afastada da largura dos ombros. Flexione os cotovelos e traga a barra em direção ao abdômen.", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
     }
 
     public Remada(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

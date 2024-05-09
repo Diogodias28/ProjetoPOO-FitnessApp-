@@ -2,33 +2,33 @@ package Model;
 import java.time.LocalDate;
 //import java.time.temporal.ChronoUnit;
 
-public class PesoLivre extends RepsPesos{
+public class AgachamentoComPeso extends RepsPesos{
 
-    public PesoLivre(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0, 0);
+    public AgachamentoComPeso(){
+        super("AgachamentoComPeso", "Realize agachamentos enquanto segura em cada mão um peso", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0, 0);
     }
 
-    public PesoLivre(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
+    public AgachamentoComPeso(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
         super(codigo, descricao, data, duracao, dificuldade, reps, peso);
     }
 
-    public PesoLivre(PesoLivre outro) {
+    public AgachamentoComPeso(AgachamentoComPeso outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
     }
 
-    public double calcularCaloriasPesoLivre (Utilizador utilizador){
+    public double calcularCaloriasAgachamentoComPeso (Utilizador utilizador){
         double calorias = calorias(utilizador);
         return calorias;
     }
 
     @Override
     public Atividade clone() {
-        return new PesoLivre(this);
+        return new AgachamentoComPeso(this);
     }
 
     @Override
     public String toString() {
-        return "PesoLivre{" +
+        return "AgachamentoComPeso{" +
                 super.toString()+
                 '}';
     }
@@ -38,8 +38,8 @@ public class PesoLivre extends RepsPesos{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         return super.equals(o);
-        /*return Double.compare(PesoLivre.getRep(), getRep()) == 0
-                && this.getTipo().equals(PesoLivre.getTipo());*/
+        /*return Double.compare(AgachamentoComPeso.getRep(), getRep()) == 0
+                && this.getTipo().equals(AgachamentoComPeso.getTipo());*/
     }
 
 }

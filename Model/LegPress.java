@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class LegPress extends RepsPesos{
 
     public LegPress(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
+        super("LegPress", "Regule o peso, sente-se na máquina, coloque o pé na base e ajuste o banco de modo que os joelhos formem um ângulo de 90 graus. Faça força para empurrar o peso com as pernas e pare antes de esticá-las, repetindo o movimento.", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
     }
 
     public LegPress(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class CurlBicep extends RepsPesos{
 
     public CurlBicep(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL,0, 0);
+        super("CurlBicep", "Selecione um peso e deixe os braços relaxarem ao lado do corpo, com as palmas voltadas para a frente. Dobre os cotovelos e levante os pesos", LocalDate.EPOCH, 0, Dificuldade.FACIL,0, 0);
     }
 
     public CurlBicep(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
