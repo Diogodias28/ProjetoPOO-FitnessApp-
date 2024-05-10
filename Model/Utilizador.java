@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class Utilizador {
-    private int codigoUtilizador;
     private String username;
     private String morada;
     private String email;
@@ -21,7 +20,6 @@ public abstract class Utilizador {
     private double frequenciaCardiacaMedia;
 
     public Utilizador(){
-        this.codigoUtilizador = 0;
         this.morada = "";
         this.email = "";
         this.password = "";
@@ -36,8 +34,7 @@ public abstract class Utilizador {
         this.frequenciaCardiacaMedia = 0;
     }
 
-    public Utilizador(int codigoUtilizador, String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
-        this.codigoUtilizador = codigoUtilizador;
+    public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
         this.morada = morada;
         this.email = email;
         this.password = password;
@@ -52,8 +49,7 @@ public abstract class Utilizador {
         this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
     }
 
-    public Utilizador(int codigoUtilizador, String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, double frequenciaCardiacaMedia) {
-        this.codigoUtilizador = codigoUtilizador;
+    public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
         this.morada = morada;
         this.email = email;
         this.password = password;
@@ -64,12 +60,11 @@ public abstract class Utilizador {
         this.data_nascimento = data_nascimento;
         this.desporto_favorito = desporto_favorito;
         this.tipo_atleta = tipo_atleta;
-        this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
+        this.frequenciaCardiacaMedia = 0;
         this.atividades = new HashMap<>();
     }
 
     public Utilizador(Utilizador outro){
-        this.codigoUtilizador = outro.getCodigoUtilizador();
         this.morada = outro.getMorada();
         this.email = outro.getEmail();
         this.password = outro.getPassword();
@@ -82,10 +77,6 @@ public abstract class Utilizador {
         this.tipo_atleta = outro.getTipo_atleta();
         this.atividades = outro.getAtividades();
         this.frequenciaCardiacaMedia = getFrequenciaCardiacaMedia();
-    }
-
-    public int getCodigoUtilizador(){
-        return codigoUtilizador;
     }
 
     public String getusername(){

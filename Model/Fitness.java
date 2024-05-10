@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,11 +27,24 @@ public class Fitness implements Serializable{ //este é o nosso model
         return users.size();
     }
 
-    public void criarUtilizador(String username, Utilizador utilizador) {
+    public void CriarUtilizador(String username, Utilizador utilizador) {
         if (!users.containsKey(username)) {
             users.put(username, utilizador);
         } else {
             System.out.println("Username já utilizado. Por favor escolha um diferente.");
+        }
+    }
+
+    public Utilizador CriarUtilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
+        if (tipo_atleta == "profissional") {
+            return new Utilizadorpro(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
+        } else if (tipo_atleta == "amador") {
+            return new Utilizadorama(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
+        } else if (tipo_atleta == "praticante ocasional"){
+            return new Utilizadorpratoc(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
+        } else {
+            System.out.println("Os únicos tipos de atleta disponíveis são 'profissional', 'amador' ou 'praticante ocasional'");
+            return null;
         }
     }
 
@@ -89,6 +103,12 @@ public class Fitness implements Serializable{ //este é o nosso model
             userActivityCounts.put(username, activityCount);
         }
         return userActivityCounts;
+    }
+
+    public PlanosdeTreino criarPlanosdeTreino(Utilizador utilizador, List<Atividade> atividades, List<DiaSemana> diasSemana, Recorrencia recorrencia){
+        PlanoTreino planoTreino = new PlanoTreino(utilizador, atividades, diasSemana, recorrencia);
+        // Aqui você pode adicionar o novo plano de treino à estrutura de dados do utilizador
+        utilizador.adicionarPlanoTreino(planoTreino);
     }
 
     /*public void grava(String Filename){

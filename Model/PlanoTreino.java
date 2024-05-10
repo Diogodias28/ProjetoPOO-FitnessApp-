@@ -1,36 +1,44 @@
-package Model;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.List;
 
-class PlanoTreino {
-    private ArrayList<Atividade> atividades;
-    private String descricao;
-    private int duracaoTotal;
+public class PlanoTreino {
+    private LocalDate data;
+    private List<Atividade> atividades;
+    private int iteracoes;
 
-    public PlanoTreino(String descricao) {
-        this.descricao = descricao;
-        this.atividades = new ArrayList<>();
-        this.duracaoTotal = 0;
+    public PlanoTreino(LocalDate data, List<Atividade> atividades, int iteracoes) {
+        this.data = data;
+        this.atividades = atividades;
+        this.iteracoes = iteracoes;
     }
 
-    public void adicionarAtividade(Atividade atividade) {
-        this.atividades.add(atividade);
-        this.duracaoTotal += atividade.getDuracao();
+    public PlanoTreino(LocalDate data, int iteracoes) {
+        this.data = data;
+        this.atividades = null;
+        this.iteracoes = iteracoes;
     }
 
-    public void removerAtividade(Atividade atividade) {
-        this.atividades.remove(atividade);
-        this.duracaoTotal -= atividade.getDuracao();
+    public LocalDate getData() {
+        return data;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
-    public int getDuracaoTotal() {
-        return duracaoTotal;
-    }
-
-    public ArrayList<Atividade> getAtividades() {
+    public List<Atividade> getAtividades() {
         return atividades;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
+    }
+
+    public int getIteracoes() {
+        return iteracoes;
+    }
+
+    public void setIteracoes(int iteracoes) {
+        this.iteracoes = iteracoes;
     }
 }

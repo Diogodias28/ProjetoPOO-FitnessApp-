@@ -2,6 +2,8 @@
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import Model.Fitness;
@@ -46,15 +48,51 @@ public class FitnessDelegate {
 
     private void AddUtilizador(){
         System.out.println("Adicionar Utilizador");
+        System.out.println("Morada: ");
+        String morada = is.nextLine();
         System.out.println("Email: ");
         String email = is.nextLine();
-        //...
-        try{
-            this.model.CriarUtilizador(email, "1123", "Jose", Genero.Masculino, 1.90, 87, LocalDate.now(), "corrida");
+        System.out.println("Password: ");
+        String password = is.nextLine();
+        System.out.println("Username: ");
+        String username = is.nextLine();
+        System.out.println("Género (Masculino, Feminino, Outro): ");
+        String genero = is.nextLine();
+        Genero generoEnum = null;
+        switch (genero.toLowerCase()) {
+            case "masculino":
+                generoEnum = Genero.Masculino;
+                break;
+            case "feminino":
+                generoEnum = Genero.Feminino;
+                break;
+            case "outro":
+                generoEnum = Genero.Outro;
+                break;
+            default:
+                System.out.println("Género inválido. Por favor, insira Masculino, Feminino ou Outro.");
+                return;
         }
-        /*catch (ExcecaoExiste e){
-            //...
-        }*/
+        System.out.println("Altura: ");
+        double altura = is.nextDouble();
+        System.out.println("Peso: ");
+        double peso = is.nextDouble();
+        is.nextLine();
+        System.out.println("Data de nascimento: ");
+        String datanasc = is.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate data = LocalDate.parse(datanasc, formatter);
+        try {
+            data = LocalDate.parse(datanasc, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Formato de data inválido. Use o formato dd-MM-yyyy.");
+            return;
+        }
+        System.out.println("Desporto favorito: ");
+        String desportofav = is.nextLine();
+        System.out.println("Tipo de atleta: ");
+        String tipoatl = is.nextLine();
+        this.model.CriarUtilizador(morada, email, password, username, generoEnum, altura, peso, data, desportofav, tipoatl); //falta tratar das exceções
     }
 
     private void ExisteUtilizador(){

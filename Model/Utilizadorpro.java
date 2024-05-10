@@ -1,11 +1,10 @@
 package Model;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 class Utilizadorpro extends Utilizador {
-    public Utilizadorpro(int codigoUtilizador, String morada, String email, String password, String nome, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
-        super(codigoUtilizador, morada, email, password, nome, genero, altura, peso, data_nascimento,desporto_favorito, tipo_atleta, frequenciaCardiacaMedia);
+    public Utilizadorpro(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
+        super(morada, email, password, username, genero, altura, peso, data_nascimento,desporto_favorito, tipo_atleta);
     }
 
     @Override
