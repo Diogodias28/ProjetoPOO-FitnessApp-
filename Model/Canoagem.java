@@ -9,7 +9,7 @@ public class Canoagem extends Distancia{
     private String embarcacao;
 
     public Canoagem(){
-        super("Canoagem","Canoagem em água calma", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0);
+        super("Canoagem","Canoagem", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0);
         this.direcao = 0;
         this.velvento = 0;
         this.nvoltas = 0;

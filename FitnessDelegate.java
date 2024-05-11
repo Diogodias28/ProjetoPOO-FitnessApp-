@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import Model.Atividade;
 import Model.Fitness;
 import Model.Genero;
 import Model.Utilizador;
 import View.NewMenu;
-
 public class FitnessDelegate {
     private Fitness model;
     private Scanner is = new Scanner(System.in);
@@ -36,11 +36,10 @@ public class FitnessDelegate {
         this.gravar();
     }
 
-    private void menuAtividades(){
+    private void menuAtividades(Utilizador utilizador){
         NewMenu menu = new NewMenu(new String[] {"Regista Atividade", "Criar Plano de Treino", "", ""});
 
-        menu.setHandler(1, ()->MenuOpcoesAtividades());
-        menu.setHandler(2, ()->ExisteUtilizador());
+        menu.setHandler(1, ()->MenuOpcoesAtividades(utilizador));
 
         menu.setPreCondition(2, ()->model.quantosUtilizadores()>0);
 
@@ -58,12 +57,15 @@ public class FitnessDelegate {
         menu.run();
     }
 
-    private void MenuOpcoesAtividades(){
+    private void MenuOpcoesAtividades(Utilizador utilizador) {
         System.out.println("Estas são as nossas atividades disponíveis. Escolha uma delas: ");
         System.out.println("(Abdominal, Agachamentos com peso, Agachamentos, BTT, Burpees, Caminhada, Canoagem, Ciclismo, Corrida, Curl Bicep, Elevacoes Laterais, Flexao, Fly, Leg Press, Mountain Climber, Natacao, Prancha, Remada, Trail)");
         String descricao = is.nextLine();
-        if (model.ExisteAtividade(descricao)){
-            addAtividade()
+        Atividade atividade = model.criarAtividade(descricao);
+
+        if (atividade != null) {
+            System.out.println("Atividade encontrada!");
+            utilizador.addAtividade(atividade);
         } else {
             System.out.println("Atividade não encontrada, reveja as nossas opções disponíveis.");
         }

@@ -47,8 +47,49 @@ public class Fitness implements Serializable{ //este é o nosso model
         }
     }
 
-    public Atividade returnAtividade (String descricao) {
-        
+    public Atividade criarAtividade(String descricao) {
+        switch (descricao.toLowerCase()) {
+            case "Abdominal":
+                return new Abdominal();
+            case "Agachamentos Com Peso":
+                return new AgachamentoComPeso();
+            case "Agachamentos":
+                return new Agachamentos();
+            case "BTT":
+                return new BTT();
+            case "Burpees":
+                return new Burpees();
+            case "Caminhada":
+                return new Caminhada();
+            case "Canoagem":
+                return new Canoagem();
+            case "Ciclismo":
+                return new Ciclismo();
+            case "Corrida":
+                return new Corrida();
+            case "Curl Bicep":
+                return new CurlBicep();
+            case "Elevações Laterais":
+                return new ElevacoesLaterais();
+            case "Flexão":
+                return new Flexao();
+            case "Fly":
+                return new Fly();
+            case "Leg Press":
+                return new LegPress();
+            case "Mountain Climber":
+                return new MountainClimber();
+            case "Natação":
+                return new Natacao();
+            case "Prancha":
+                return new Prancha();
+            case "Remada":
+                return new Remada();
+            case "Trail":
+                return new Trail();
+            default:
+                return null;
+        }
     }
 
     public Utilizador CriarUtilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {

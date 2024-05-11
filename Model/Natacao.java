@@ -5,7 +5,7 @@ public class Natacao extends Distancia{
     private Estilo estilo;
 
     public Natacao(){
-        super("Natacao","Natação numa piscina no estilo que preferir.", LocalDate.EPOCH, 0, Dificuldade.FACIL, 0);
+        super("Natacao","Natação", LocalDate.EPOCH, 0, Dificuldade.FACIL, 0);
         this.estilo = Estilo.COSTAS;
     }
 

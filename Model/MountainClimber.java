@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class MountainClimber extends Reps{
 
     public MountainClimber(){
-        super("MountainClimber", "Coloque-se em posição de prancha com os braços esticados, aproxime o cada joelho, alternando, do peito e regresse à posição inicial de forma repetida e rápida.", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
+        super("MountainClimber", "Mountain Climber", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
     }
 
     public MountainClimber(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

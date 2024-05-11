@@ -1,4 +1,4 @@
-package Model;
+/*package Model;
 import java.util.*;
 
 public class Recordes {
@@ -42,8 +42,9 @@ public class Recordes {
 
     public static double calcularQuilometrosTotalizados(Utilizador utilizador) {
         double quilometrosTotalizados = 0;
-        for (Atividade atividade : utilizador.getAtividades()) {
-            quilometrosTotalizados += atividade.getDistancia();
+        for (Map.Entry<String, Atividade> entry : utilizador.getAtividades().entrySet()) {
+            Atividade atividade = entry.getValue();
+            quilometrosTotalizados += distancia.getdistancia();
         }
         return quilometrosTotalizados;
     }
@@ -62,4 +63,4 @@ public class Recordes {
             System.out.println(atividade);
         }
     }
-}
+}*/

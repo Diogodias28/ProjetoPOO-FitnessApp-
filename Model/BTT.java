@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class BTT extends DistanciaeAltimetria{
 
     public BTT(){
-        super("BTT", "Bicicleta todo terreno", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0, 0);
+        super("BTT", "BTT", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0, 0);
     }
 
     public BTT(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
