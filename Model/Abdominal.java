@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Abdominal extends Reps{
 
     public Abdominal(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
+        super("", "Abdominal", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
     }
 
     public Abdominal(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

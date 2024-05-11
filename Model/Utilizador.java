@@ -20,7 +20,6 @@ public abstract class Utilizador implements Serializable{
     private String desporto_favorito;
     private Map<String, Atividade> atividades;
     private ArrayList<PlanoTreino> planosTreino;
-    private double frequenciaCardiacaMedia;
 
     public Utilizador(){
         this.morada = "";
@@ -35,10 +34,9 @@ public abstract class Utilizador implements Serializable{
         this.tipo_atleta = "";
         this.atividades = new HashMap<>();
         this.planosTreino = new ArrayList<>();
-        this.frequenciaCardiacaMedia = 0;
     }
 
-    public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, ArrayList <PlanoTreino> planosTreino,double frequenciaCardiacaMedia) {
+    public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, ArrayList <PlanoTreino> planosTreino) {
         this.morada = morada;
         this.email = email;
         this.password = password;
@@ -54,7 +52,6 @@ public abstract class Utilizador implements Serializable{
         for (PlanoTreino plano : planosTreino) {
             this.planosTreino.add(plano.clone());
         }
-        this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
     }
 
     public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
@@ -68,7 +65,6 @@ public abstract class Utilizador implements Serializable{
         this.data_nascimento = data_nascimento;
         this.desporto_favorito = desporto_favorito;
         this.tipo_atleta = tipo_atleta;
-        this.frequenciaCardiacaMedia = 0;
         this.atividades = new HashMap<>();
         this.planosTreino = new ArrayList<>();
     }
@@ -86,7 +82,6 @@ public abstract class Utilizador implements Serializable{
         this.tipo_atleta = outro.getTipo_atleta();
         this.atividades = outro.getAtividades();
         this.planosTreino = outro.getPlanosTreino();
-        this.frequenciaCardiacaMedia = getFrequenciaCardiacaMedia();
     }
 
     public String getusername(){
@@ -103,10 +98,6 @@ public abstract class Utilizador implements Serializable{
 
     public double getPeso(){
         return peso;
-    }
-
-    public double getFrequenciaCardiacaMedia(){
-        return frequenciaCardiacaMedia;
     }
 
     public Map<String, Atividade> getAtividades() {
@@ -242,7 +233,5 @@ public abstract class Utilizador implements Serializable{
     //public Utilizador clone(){
     //    return new Utilizador(this);
     //}
-
-    public abstract double calcularFatorCalorias();
     public abstract Utilizador clone();
 }

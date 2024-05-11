@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class Fitness implements Serializable{ //este é o nosso model
     private Map <String, Utilizador> utilizadores;
+    private Map <String, Atividade> atividades;
     private Map <String, Comparator<Utilizador>> comparadores;
 
     public Fitness() {
@@ -29,12 +30,25 @@ public class Fitness implements Serializable{ //este é o nosso model
         return utilizadores.size();
     }
 
-    public void ExisteUtilizador(String username, Utilizador utilizador) {
+    public boolean ExisteUtilizador(String username) {
         if (!utilizadores.containsKey(username)) {
-            utilizadores.put(username, utilizador);
+            return false;
         } else {
-            System.out.println("Username já utilizado. Por favor escolha um diferente.");
+            System.out.println("Este utilizador foi criado.");
+            return true;
         }
+    }
+
+    public boolean ExisteAtividade(String descricao){
+        if (!atividades.containsKey(descricao)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Atividade returnAtividade (String descricao) {
+        
     }
 
     public Utilizador CriarUtilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
@@ -45,6 +59,7 @@ public class Fitness implements Serializable{ //este é o nosso model
         } else if (tipo_atleta.compareTo("praticante ocasional") == 0){
             return new Utilizadorpratoc(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
         } else {
+            System.out.println("Os únicos tipos de atleta disponíveis são 'profissional', 'amador' ou 'praticante ocasional'");
             return null;
         }
     }

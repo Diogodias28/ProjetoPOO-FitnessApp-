@@ -31,20 +31,17 @@ public class Reps extends Atividade {
     @Override
     public double calorias(Utilizador utilizador) {
         double calorias = calcularCaloriasBase(utilizador);
-        double fatorFreq = calcularFatorFreqCardiaca(utilizador);
-        return calorias * getDificuldade().getFator() * fatorFreq;
+        return calorias * getDificuldade().getFator();
     }
 
     private double calcularCaloriasBase(Utilizador utilizador) {
-        
-        double calorias = reps *getDuracao() * (utilizador.getPeso()/10);
-
-        return calorias;
-    }
-
-    private double calcularFatorFreqCardiaca(Utilizador utilizador){
-        double fator = utilizador.getFrequenciaCardiacaMedia();
-        return fator;
+        if (utilizador instanceof Utilizadorpro) {
+            return getFrequenciaCardiacaMedia() * reps / utilizador.getPeso();
+        } else if (utilizador instanceof Utilizadorpratoc) {
+            return getFrequenciaCardiacaMedia() * reps;
+        } else {
+            return getFrequenciaCardiacaMedia() * reps * utilizador.getPeso();
+        }
     }
 
     public Atividade clone() {

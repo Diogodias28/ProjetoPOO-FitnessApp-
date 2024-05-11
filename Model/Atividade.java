@@ -10,6 +10,7 @@ public abstract class Atividade implements Serializable {
     private int duracao;
     private Utilizador user;
     private Dificuldade dificuldade;
+    private double frequenciaCardiacaMedia;
 
     public Atividade() {
         this.codigo = "";
@@ -18,6 +19,7 @@ public abstract class Atividade implements Serializable {
         this.duracao = 0;
         this.user = getUser();
         this.dificuldade= Dificuldade.FACIL;
+        this.frequenciaCardiacaMedia = 0;
     }
 
     public Atividade(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade) {
@@ -26,6 +28,7 @@ public abstract class Atividade implements Serializable {
         this.data = data;
         this.duracao = duracao;
         this.dificuldade= dificuldade;
+        this.frequenciaCardiacaMedia = 0;
     }
 
     public Atividade(Atividade outro){
@@ -34,6 +37,7 @@ public abstract class Atividade implements Serializable {
         this.data = outro.getData();
         this.duracao = outro.getDuracao();
         this.dificuldade= outro.getDificuldade();
+        this.frequenciaCardiacaMedia = outro.getFrequenciaCardiacaMedia();
     }
     public String getCodigo() {
         return codigo;
@@ -73,6 +77,14 @@ public abstract class Atividade implements Serializable {
 
     public void setDificuldade(Dificuldade dificuldade) {
         this.dificuldade = dificuldade;
+    }
+
+    public double getFrequenciaCardiacaMedia(){
+        return frequenciaCardiacaMedia;
+    }
+
+    public void setFrequenciaCardiacaMedia(double frequenciaCardiacaMedia){
+        this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
     }
 
     @Override
