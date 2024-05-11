@@ -29,11 +29,15 @@ public class FitnessDelegate {
         NewMenu menu = new NewMenu(new String[] {"Menu utilizador", "Menu Atividades", "Gravar"});
 
         menu.setHandler(1, ()->menuUtilizadores());
-        /*menu.setHandler(2, ()->ExisteUtilizador());*/
+        menu.setHandler(2, ()->menuAtividades());
         /*menu.setHandler(3, ()->gravar());*/
 
         menu.run();
         this.gravar();
+    }
+
+    private void menuAtividades(){
+        
     }
 
     private void menuUtilizadores(){
@@ -94,10 +98,13 @@ public class FitnessDelegate {
         System.out.println("Tipo de atleta(profissional, amador, praticante ocasional): ");
         String tipoatl = is.nextLine();
         Utilizador utilizador = this.model.CriarUtilizador(morada, email, password, username, generoEnum, altura, peso, data, desportofav, tipoatl); //falta tratar das exceções
+        model.addUtilizador(username, utilizador);
     }
 
     private void ExisteUtilizador(){
-        System.out.println("Existe Utilizador");
+        System.out.println("Username: ");
+        String username = is.nextLine();
+        model.ExisteUtilizador(username);
     }
 
     private void gravar(){

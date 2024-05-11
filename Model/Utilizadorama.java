@@ -15,15 +15,6 @@ class Utilizadorama extends Utilizador {
         super(outro.getMorada(), outro.getEmail(), outro.getPassword(), outro.getusername(), outro.getGenero(), outro.getAltura(), outro.getPeso(), outro.getData_nascimento(), outro.getDesporto_favorito(), outro.getTipo_atleta());
     }
 
-    @Override
-    public double calcularFatorCalorias() {
-        double fator = 0.0;
-        for (Atividade atividade : getAtividades().values()) {
-            fator += atividade.getDificuldade().getFator() * atividade.getDuracao() / getPeso();
-        }
-        return fator;
-    }
-
     public Utilizador clone(){
         return new Utilizadorama(this);
     }

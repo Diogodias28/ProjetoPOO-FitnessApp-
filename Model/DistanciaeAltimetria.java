@@ -43,22 +43,19 @@ public class DistanciaeAltimetria extends Atividade {
     @Override
     public double calorias(Utilizador utilizador) {
         double calorias = calcularCaloriasBase(utilizador);
-        double fatorFreq = calcularFatorFreqCardiaca(utilizador);
-        return calorias * getDificuldade().getFator() * fatorFreq;
+        return calorias * getDificuldade().getFator() * distancia * altimetria;
     }
 
     private double calcularCaloriasBase(Utilizador utilizador) {
-        
-        double calorias = distancia * altimetria *getDuracao() * (utilizador.getPeso()/10);
-
-        return calorias;
+        if (utilizador instanceof Utilizadorpro) {
+            return getFrequenciaCardiacaMedia() * getDuracao() / utilizador.getPeso();
+        } else if (utilizador instanceof Utilizadorpratoc) {
+            return getFrequenciaCardiacaMedia() * getDuracao();
+        } else {
+            return getFrequenciaCardiacaMedia() * getDuracao() * utilizador.getPeso();
+        }
     }
-
-    private double calcularFatorFreqCardiaca(Utilizador utilizador){
-        double fator = utilizador.getFrequenciaCardiacaMedia();
-        return fator;
-    }
-
+    
     public Atividade clone() {
         return new DistanciaeAltimetria(this);
     }

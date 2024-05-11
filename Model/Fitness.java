@@ -29,11 +29,12 @@ public class Fitness implements Serializable{ //este é o nosso model
         return utilizadores.size();
     }
 
-    public void ExisteUtilizador(String username, Utilizador utilizador) {
+    public boolean ExisteUtilizador(String username) {
         if (!utilizadores.containsKey(username)) {
-            utilizadores.put(username, utilizador);
+            return false;
         } else {
-            System.out.println("Username já utilizado. Por favor escolha um diferente.");
+            System.out.println("Este utilizador foi criado.");
+            return true;
         }
     }
 
@@ -45,6 +46,7 @@ public class Fitness implements Serializable{ //este é o nosso model
         } else if (tipo_atleta.compareTo("praticante ocasional") == 0){
             return new Utilizadorpratoc(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
         } else {
+            System.out.println("Os únicos tipos de atleta disponíveis são 'profissional', 'amador' ou 'praticante ocasional'");
             return null;
         }
     }
