@@ -32,8 +32,8 @@ public class Recordes {
     public static String obterTipoAtividadeMaisRealizada(List<Utilizador> utilizadores) {
         Map<String, Integer> contadorAtividades = new HashMap<>();
         for (Utilizador utilizador : utilizadores) {
-            for (Atividade atividade : utilizador.getAtividades()) {
-                String tipoAtividade = atividade.getTipo();
+            for (Atividade atividade : utilizador.getAtividades().values()) {
+                String tipoAtividade = atividade.getDificuldade().name();
                 contadorAtividades.put(tipoAtividade, contadorAtividades.getOrDefault(tipoAtividade, 0) + 1);
             }
         }
