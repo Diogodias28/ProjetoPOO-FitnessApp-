@@ -7,6 +7,14 @@ class Utilizadorpro extends Utilizador {
         super(morada, email, password, username, genero, altura, peso, data_nascimento,desporto_favorito, tipo_atleta);
     }
 
+    public Utilizadorpro() {
+        super("", "", "", "", Genero.Outro, 0, 0, LocalDate.EPOCH,"", "");
+    }
+
+    public Utilizadorpro(Utilizadorpro outro) {
+        super(outro.getMorada(), outro.getEmail(), outro.getPassword(), outro.getusername(), outro.getGenero(), outro.getAltura(), outro.getPeso(), outro.getData_nascimento(), outro.getDesporto_favorito(), outro.getTipo_atleta());
+    }
+
     @Override
     public double calcularFatorCalorias() {
         double fator = 0.0;
@@ -14,5 +22,9 @@ class Utilizadorpro extends Utilizador {
             fator += atividade.getDificuldade().getFator() * atividade.getDuracao() / getPeso();
         }
         return fator;
+    }
+
+    public Utilizador clone(){
+        return new Utilizadorpro(this);
     }
 }

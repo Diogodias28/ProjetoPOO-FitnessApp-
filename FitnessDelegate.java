@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import Model.Fitness;
 import Model.Genero;
+import Model.Utilizador;
 import View.NewMenu;
 
 public class FitnessDelegate {
@@ -90,9 +91,9 @@ public class FitnessDelegate {
         }
         System.out.println("Desporto favorito: ");
         String desportofav = is.nextLine();
-        System.out.println("Tipo de atleta: ");
+        System.out.println("Tipo de atleta(profissional, amador, praticante ocasional): ");
         String tipoatl = is.nextLine();
-        this.model.CriarUtilizador(morada, email, password, username, generoEnum, altura, peso, data, desportofav, tipoatl); //falta tratar das exceções
+        Utilizador utilizador = this.model.CriarUtilizador(morada, email, password, username, generoEnum, altura, peso, data, desportofav, tipoatl); //falta tratar das exceções
     }
 
     private void ExisteUtilizador(){

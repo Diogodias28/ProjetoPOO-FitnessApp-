@@ -1,11 +1,13 @@
 package Model;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public abstract class Utilizador {
+public abstract class Utilizador implements Serializable{
     private String username;
     private String morada;
     private String email;
@@ -17,6 +19,7 @@ public abstract class Utilizador {
     private String tipo_atleta;
     private String desporto_favorito;
     private Map<String, Atividade> atividades;
+    private ArrayList<PlanoTreino> planosTreino;
     private double frequenciaCardiacaMedia;
 
     public Utilizador(){
@@ -31,10 +34,11 @@ public abstract class Utilizador {
         this.desporto_favorito = "";
         this.tipo_atleta = "";
         this.atividades = new HashMap<>();
+        this.planosTreino = new ArrayList<>();
         this.frequenciaCardiacaMedia = 0;
     }
 
-    public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, double frequenciaCardiacaMedia) {
+    public Utilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta, Map<String, Atividade> atividades, ArrayList <PlanoTreino> planosTreino,double frequenciaCardiacaMedia) {
         this.morada = morada;
         this.email = email;
         this.password = password;
@@ -46,6 +50,10 @@ public abstract class Utilizador {
         this.desporto_favorito = desporto_favorito;
         this.tipo_atleta = tipo_atleta;
         this.atividades = atividades.entrySet().stream().collect(Collectors.toMap(k->k.getKey(), v-> v.getValue().clone()));
+        this.planosTreino = new ArrayList<>(planosTreino.size());
+        for (PlanoTreino plano : planosTreino) {
+            this.planosTreino.add(plano.clone());
+        }
         this.frequenciaCardiacaMedia = frequenciaCardiacaMedia;
     }
 
@@ -62,13 +70,14 @@ public abstract class Utilizador {
         this.tipo_atleta = tipo_atleta;
         this.frequenciaCardiacaMedia = 0;
         this.atividades = new HashMap<>();
+        this.planosTreino = new ArrayList<>();
     }
 
     public Utilizador(Utilizador outro){
         this.morada = outro.getMorada();
         this.email = outro.getEmail();
         this.password = outro.getPassword();
-        this.username = outro.getUsername();
+        this.username = outro.getusername();
         this.genero = outro.getGenero();
         this.altura = outro.getAltura();
         this.peso = outro.getPeso();
@@ -76,10 +85,11 @@ public abstract class Utilizador {
         this.desporto_favorito = outro.getDesporto_favorito();
         this.tipo_atleta = outro.getTipo_atleta();
         this.atividades = outro.getAtividades();
+        this.planosTreino = outro.getPlanosTreino();
         this.frequenciaCardiacaMedia = getFrequenciaCardiacaMedia();
     }
 
-    public String getUsername(){
+    public String getusername(){
         return username;
     }
 
@@ -178,10 +188,21 @@ public abstract class Utilizador {
         return atividades.get(cod).clone();
     }
 
-    public double calcularTotalCalorias() {
+    public ArrayList<PlanoTreino> getPlanosTreino() {
+        return planosTreino;
+    }
+
+    public void adicionarPlanoTreino(PlanoTreino planoTreino) {
+        planosTreino.add(planoTreino);
+    }
+
+    public double calcularTotalCalorias(LocalDate inicioPeriodo, LocalDate fimPeriodo) {
         double totalCalorias = 0.0;
         for (Atividade atividade : atividades.values()) {
-            totalCalorias += atividade.calorias(this);
+            LocalDate dataAtividade = atividade.getData();
+            if (!dataAtividade.isBefore(inicioPeriodo) && !dataAtividade.isAfter(fimPeriodo)) {
+                totalCalorias += atividade.calorias(this);
+            }
         }
         return totalCalorias;
     }
@@ -195,7 +216,7 @@ public abstract class Utilizador {
                 && Double.compare(that.getPeso(), getPeso()) == 0
                 && Objects.equals(getEmail(), that.getEmail())
                 && Objects.equals(getPassword(), that.getPassword())
-                && Objects.equals(getUsername(), that.getUsername())
+                && Objects.equals(getusername(), that.getusername())
                 && getGenero() == that.getGenero()
                 && Objects.equals(getData_nascimento(), that.getData_nascimento())
                 && Objects.equals(getDesporto_favorito(), that.getDesporto_favorito())
@@ -222,4 +243,5 @@ public abstract class Utilizador {
     //}
 
     public abstract double calcularFatorCalorias();
+    public abstract Utilizador clone();
 }

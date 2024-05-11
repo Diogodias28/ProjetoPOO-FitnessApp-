@@ -1,45 +1,97 @@
 package Model;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanoTreino {
-    private LocalDate data;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private List<Atividade> atividades;
-    private int iteracoes;
+    private Utilizador user;
 
-    public PlanoTreino(LocalDate data, List<Atividade> atividades, int iteracoes) {
-        this.data = data;
+    public PlanoTreino() {
+        this.dataInicio = LocalDate.ofEpochDay(0);
+        this.dataFim = LocalDate.ofEpochDay(0);
+        this.atividades = new ArrayList<>();
+        this.user = getUser();
+    }
+
+    public PlanoTreino(LocalDate dataInicio, LocalDate dataFim, List<Atividade> atividades) {
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
         this.atividades = atividades;
-        this.iteracoes = iteracoes;
     }
 
-    public PlanoTreino(LocalDate data, int iteracoes) {
-        this.data = data;
-        this.atividades = null;
-        this.iteracoes = iteracoes;
+    public PlanoTreino(List<Atividade> atividades) {
+        this.dataInicio = calcularDataPrimeiraAtividade(atividades);
+        this.dataFim = calcularDataUltimaAtividade(atividades);
+        this.atividades = atividades;
     }
 
-    public LocalDate getData() {
-        return data;
+    public PlanoTreino(PlanoTreino outro) {
+        this.dataInicio = outro.getDataInicio();
+        this.dataFim = outro.getDataFim();
+        this.atividades = outro.getAtividades();
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public LocalDate getDataInicio() {
+        return dataInicio;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataInicio(LocalDate dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public Utilizador getUser() {
+        return user;
+    }
+
+    public void setUser(Utilizador user) {
+        this.user = user;
     }
 
     public List<Atividade> getAtividades() {
         return atividades;
     }
 
-    public void setAtividades(List<Atividade> atividades) {
-        this.atividades = atividades;
+    public void adicionarAtividade(Atividade atividade) {
+        atividades.add(atividade);
     }
 
-    public int getIteracoes() {
-        return iteracoes;
+    public LocalDate calcularDataPrimeiraAtividade(List<Atividade> atividades) {
+        if (atividades.isEmpty()) {
+            return null;
+        }
+
+        return atividades.get(0).getData();
     }
 
-    public void setIteracoes(int iteracoes) {
-        this.iteracoes = iteracoes;
+    public LocalDate calcularDataUltimaAtividade(List<Atividade> atividades) {
+        if (atividades.isEmpty()) {
+            return null;
+        }
+        int index = atividades.size();
+        return atividades.get(index).getData();
+    }
+
+    public double calcularTotalCaloriasPT(List<Atividade> atividades, Utilizador utilizador) {
+        double totalCalorias = 0.0;
+        for (Atividade atividade : atividades) {
+            totalCalorias += atividade.calorias(utilizador);
+        }
+        return totalCalorias;
+    }
+
+    public PlanoTreino clone() {
+        return new PlanoTreino(this);
     }
 }

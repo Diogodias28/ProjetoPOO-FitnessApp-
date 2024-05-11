@@ -1,8 +1,9 @@
 package Model;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public abstract class Atividade {
+public abstract class Atividade implements Serializable {
     private String codigo;
     private String descricao;
     private LocalDate data;
