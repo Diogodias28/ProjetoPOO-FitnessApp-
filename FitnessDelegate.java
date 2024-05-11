@@ -37,7 +37,14 @@ public class FitnessDelegate {
     }
 
     private void menuAtividades(){
-        
+        NewMenu menu = new NewMenu(new String[] {"Regista Atividade", "Criar Plano de Treino", "", ""});
+
+        menu.setHandler(1, ()->MenuOpcoesAtividades());
+        menu.setHandler(2, ()->ExisteUtilizador());
+
+        menu.setPreCondition(2, ()->model.quantosUtilizadores()>0);
+
+        menu.run();
     }
 
     private void menuUtilizadores(){
@@ -50,6 +57,54 @@ public class FitnessDelegate {
 
         menu.run();
     }
+
+    private void MenuOpcoesAtividades(){
+        System.out.println("Estas são as nossas atividades disponíveis. Escolha uma delas: ");
+        System.out.println("(Abdominal, Agachamentos com peso, Agachamentos, BTT, Burpees, Caminhada, Canoagem, Ciclismo, Corrida, Curl Bicep, Elevacoes Laterais, Flexao, Fly, Leg Press, Mountain Climber, Natacao, Prancha, Remada, Trail)");
+        String descricao = is.nextLine();
+        if (model.ExisteAtividade(descricao)){
+            addAtividade()
+        } else {
+            System.out.println("Atividade não encontrada, reveja as nossas opções disponíveis.");
+        }
+    }
+
+    /*MenuOpcoesDistancia(){
+        NewMenu menu = new NewMenu(new String[] {"Natacao", "Canoagem", "Reps", "RepsPesos"});
+
+        menu.setHandler(1, ()->MenuOpcoesDistancia());
+        menu.setHandler(2, ()->MenuOpcoesDistanciaeAltimetria());
+        menu.setHandler(3, ()->MenuOpcoesReps());
+        menu.setHandler(4, ()->MenuOpcoesRepsPesos());
+    }
+
+    MenuOpcoesDistanciaeAltimetria(){
+        NewMenu menu = new NewMenu(new String[] {"BTT", "Caminhada", "Ciclismo", "Corrida", "Trail"});
+
+        menu.setHandler(1, ()->BTT());
+        menu.setHandler(2, ()->Caminhada());
+        menu.setHandler(3, ()->Ciclismo());
+        menu.setHandler(4, ()->Corrida());
+        menu.setHandler(4, ()->Trail());
+    }
+
+    MenuOpcoesReps(){
+        NewMenu menu = new NewMenu(new String[] {"Abdominal", "Agachamentos", "Burpees", "Flexao", "MountainClimber", "Prancha"});
+
+        menu.setHandler(1, ()->Abdominal());
+        menu.setHandler(2, ()->Agachamentos());
+        menu.setHandler(3, ()->Burpees());
+        menu.setHandler(4, ()->Flexao());
+    }
+
+    MenuOpcoesRepsPesos(){
+        NewMenu menu = new NewMenu(new String[] {"CurlBicep", "ElevacoesLaterais", "Fly", "LegPress", "Remada"});
+
+        menu.setHandler(1, ()->MenuOpcoesDistancia());
+        menu.setHandler(2, ()->MenuOpcoesDistanciaeAltimetria());
+        menu.setHandler(3, ()->MenuOpcoesReps());
+        menu.setHandler(4, ()->MenuOpcoesRepsPesos());
+    }*/
 
     private void AddUtilizador(){
         System.out.println("Adicionar Utilizador");

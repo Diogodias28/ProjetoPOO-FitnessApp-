@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class Fitness implements Serializable{ //este é o nosso model
     private Map <String, Utilizador> utilizadores;
+    private Map <String, Atividade> atividades;
     private Map <String, Comparator<Utilizador>> comparadores;
 
     public Fitness() {
@@ -36,6 +37,18 @@ public class Fitness implements Serializable{ //este é o nosso model
             System.out.println("Este utilizador foi criado.");
             return true;
         }
+    }
+
+    public boolean ExisteAtividade(String descricao){
+        if (!atividades.containsKey(descricao)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Atividade returnAtividade (String descricao) {
+        
     }
 
     public Utilizador CriarUtilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
