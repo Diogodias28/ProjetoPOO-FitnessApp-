@@ -110,7 +110,8 @@ public abstract class Utilizador implements Serializable{
     }
 
     public Map<String, Atividade> getAtividades() {
-        return atividades.entrySet().stream().collect(Collectors.toMap(k->k.getKey(), v-> v.getValue().clone()));
+        return atividades.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().clone()));
     }
 
     public void setAtividades(Map<String, Atividade> atividades) {
