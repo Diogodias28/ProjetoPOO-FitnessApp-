@@ -16,11 +16,6 @@ public class Prancha extends Reps{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
-    public double calcularCaloriasPrancha (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias*4/5;
-    }
-
     @Override
     public Atividade clone() {
         return new Prancha(this);

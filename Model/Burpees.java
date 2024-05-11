@@ -16,11 +16,6 @@ public class Burpees extends Reps{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
-    public double calcularCaloriasBurpees (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias*7/5;
-    }
-
     @Override
     public Atividade clone() {
         return new Burpees(this);

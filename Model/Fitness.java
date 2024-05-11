@@ -18,11 +18,14 @@ import java.util.Map;
 
 public class Fitness implements Serializable{ //este é o nosso model
     private Map <String, Utilizador> utilizadores;
-    private Map <String, Atividade> atividades;
+    private List <Atividade> atividades;
+    private Map<String, Atividade> mapaAtividades;
     private Map <String, Comparator<Utilizador>> comparadores;
 
     public Fitness() {
         utilizadores = new HashMap<>();
+        atividades = atividadesDisponiveis();
+        mapaAtividades = criarMapaAtividades(atividades);
         comparadores = new HashMap<>();
     }
 
@@ -34,77 +37,92 @@ public class Fitness implements Serializable{ //este é o nosso model
         if (!utilizadores.containsKey(username)) {
             return false;
         } else {
-            System.out.println("Este utilizador foi criado.");
+            System.out.println("Este utilizador já existe.");
             return true;
         }
     }
 
+    public Map<String, Atividade> criarMapaAtividades(List<Atividade> atividades) {
+        Map<String, Atividade> mapaAtividades = new HashMap<>();
+        for (Atividade atividade : atividades) {
+            mapaAtividades.put(atividade.getDescricao(), atividade);
+        }
+        return mapaAtividades;
+    }
+
+    public List<Atividade> atividadesDisponiveis() {
+        List<Atividade> atividades = new ArrayList<>();
+        atividades.add(new Abdominal());
+        atividades.add(new AgachamentoComPeso());
+        atividades.add(new Agachamentos());
+        atividades.add(new BTT());
+        atividades.add(new Burpees());
+        atividades.add(new Caminhada());
+        atividades.add(new Canoagem());
+        atividades.add(new Ciclismo());
+        atividades.add(new Corrida());
+        atividades.add(new CurlBicep());
+        atividades.add(new ElevacoesLaterais());
+        atividades.add(new Flexao());
+        atividades.add(new Fly());
+        atividades.add(new LegPress());
+        atividades.add(new MountainClimber());
+        atividades.add(new Natacao());
+        atividades.add(new Prancha());
+        atividades.add(new Remada());
+        atividades.add(new Trail());
+        return atividades;
+    }
+
+    public boolean ExisteUtilizador2(String username, String password) {
+        if (!utilizadores.containsKey(username)) {
+            System.out.println("O utilizador não existe.");
+            return false;
+        }
+    
+        String passwordArmazenada = utilizadores.get(username).getPassword();
+    
+        if (!password.equals(passwordArmazenada)) {
+            System.out.println("A senha está incorreta.");
+            return false;
+        }
+    
+        return true;
+    }
+
     public boolean ExisteAtividade(String descricao){
-        if (!atividades.containsKey(descricao)) {
+        if (!mapaAtividades.containsKey(descricao)) {
             return false;
         } else {
             return true;
         }
     }
 
-    public Atividade criarAtividade(String descricao) {
-        switch (descricao.toLowerCase()) {
-            case "Abdominal":
-                return new Abdominal();
-            case "Agachamentos Com Peso":
-                return new AgachamentoComPeso();
-            case "Agachamentos":
-                return new Agachamentos();
-            case "BTT":
-                return new BTT();
-            case "Burpees":
-                return new Burpees();
-            case "Caminhada":
-                return new Caminhada();
-            case "Canoagem":
-                return new Canoagem();
-            case "Ciclismo":
-                return new Ciclismo();
-            case "Corrida":
-                return new Corrida();
-            case "Curl Bicep":
-                return new CurlBicep();
-            case "Elevações Laterais":
-                return new ElevacoesLaterais();
-            case "Flexão":
-                return new Flexao();
-            case "Fly":
-                return new Fly();
-            case "Leg Press":
-                return new LegPress();
-            case "Mountain Climber":
-                return new MountainClimber();
-            case "Natação":
-                return new Natacao();
-            case "Prancha":
-                return new Prancha();
-            case "Remada":
-                return new Remada();
-            case "Trail":
-                return new Trail();
-            default:
-                return null;
-        }
+    public Atividade getAtividade(String descricao) {
+        Atividade atividade = mapaAtividades.get(descricao);
+        return atividade;
     }
 
     public Utilizador CriarUtilizador(String morada, String email, String password, String username, Genero genero, double altura, double peso, LocalDate data_nascimento, String desporto_favorito, String tipo_atleta) {
+        Utilizador novoUtilizador = null;
+    
         if (tipo_atleta.compareTo("profissional") == 0) {
-            return new Utilizadorpro(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
+            novoUtilizador = new Utilizadorpro(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
         } else if (tipo_atleta.compareTo("amador") == 0) {
-            return new Utilizadorama(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
-        } else if (tipo_atleta.compareTo("praticante ocasional") == 0){
-            return new Utilizadorpratoc(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
+            novoUtilizador = new Utilizadorama(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
+        } else if (tipo_atleta.compareTo("praticante ocasional") == 0) {
+            novoUtilizador = new Utilizadorpratoc(morada, email, password, username, genero, altura, peso, data_nascimento, desporto_favorito, tipo_atleta);
         } else {
             System.out.println("Os únicos tipos de atleta disponíveis são 'profissional', 'amador' ou 'praticante ocasional'");
-            return null;
         }
+    
+        if (novoUtilizador != null) {
+            addUtilizador(username, novoUtilizador);
+        }
+    
+        return novoUtilizador;
     }
-
+    
     public void addUtilizador(String username, Utilizador utilizador) {
         utilizadores.put(username, utilizador);
     }
@@ -247,8 +265,7 @@ public class Fitness implements Serializable{ //este é o nosso model
         }
     }
 
-    private double realizarAtividade(Utilizador utilizador, Atividade atividade) {
-        utilizador.addAtividade(atividade);
+    public double realizarAtividade(Utilizador utilizador, Atividade atividade) {
         double caloriasGastas = atividade.calorias(utilizador);
         
         return caloriasGastas;

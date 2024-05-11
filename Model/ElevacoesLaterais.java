@@ -16,11 +16,6 @@ public class ElevacoesLaterais extends RepsPesos{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
     }
 
-    public double calcularCaloriasElevacoesLaterais (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias*3/5;
-    }
-
     @Override
     public Atividade clone() {
         return new ElevacoesLaterais(this);

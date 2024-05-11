@@ -64,10 +64,10 @@ public class Canoagem extends Distancia{
         this.embarcacao = embarcacao;
     }
 
-    public double caloriasCanoagem() {
+    public double caloriasCanoagem(Utilizador utilizador) {
         long idade =  ChronoUnit.YEARS.between(LocalDate.now(),
                 getUser().getData_nascimento());
-        double calorias = calorias(getUser()); //não sei se usamos utilizador como parametro ou fazemos getuser
+        double calorias = calorias(utilizador); //não sei se usamos utilizador como parametro ou fazemos getuser
         return calorias*getDirecao()*idade/4;
     }
 

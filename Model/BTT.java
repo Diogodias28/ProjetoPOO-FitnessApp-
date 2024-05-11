@@ -15,11 +15,6 @@ public class BTT extends DistanciaeAltimetria{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
-    public double caloriasBTT(Utilizador utilizador) {
-        double calorias = calorias(utilizador);
-        return calorias * 8/5;
-    }
-
     @Override
     public Atividade clone() {
         return new BTT(this);
@@ -37,8 +32,7 @@ public class BTT extends DistanciaeAltimetria{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BTT other = (BTT) o;
-        return super.equals(other) &&
-        this.caloriasBTT(null) == other.caloriasBTT(null);
+        return super.equals(other);
     }
 
 }

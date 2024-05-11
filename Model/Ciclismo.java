@@ -15,11 +15,6 @@ public class Ciclismo extends DistanciaeAltimetria{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
-    public double caloriasCiclismo(Utilizador utilizador) {
-        double calorias = calorias(utilizador);
-        return calorias;
-    }
-
     @Override
     public Atividade clone() {
         return new Ciclismo(this);

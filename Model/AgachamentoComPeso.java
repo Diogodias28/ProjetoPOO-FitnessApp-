@@ -16,11 +16,6 @@ public class AgachamentoComPeso extends RepsPesos{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
     }
 
-    public double calcularCaloriasAgachamentoComPeso (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias;
-    }
-
     @Override
     public Atividade clone() {
         return new AgachamentoComPeso(this);

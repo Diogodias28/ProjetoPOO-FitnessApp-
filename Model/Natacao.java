@@ -27,8 +27,8 @@ public class Natacao extends Distancia{
         this.estilo = estilo;
     }
 
-    public double caloriasNatacao() {
-        double calorias = calorias(getUser()); //não sei se usamos utilizador como parametro ou fazemos getuser
+    public double caloriasNatacao(Utilizador utilizador) {
+        double calorias = calorias(utilizador);
         return calorias*getestilo().getFator();
     }
 

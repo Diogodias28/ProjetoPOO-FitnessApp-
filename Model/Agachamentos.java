@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Agachamentos extends Reps{
 
     public Agachamentos(){
-        super("", "Agachamentos", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
+        super("Agachamentos", "Agachamentos", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
     }
 
     public Agachamentos(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
@@ -14,11 +14,6 @@ public class Agachamentos extends Reps{
 
     public Agachamentos(Agachamentos outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
-    }
-
-    public double calcularCaloriasAgachamentos (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias*3/5;
     }
 
     @Override

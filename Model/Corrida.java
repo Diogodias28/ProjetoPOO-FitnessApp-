@@ -14,12 +14,7 @@ public class Corrida extends DistanciaeAltimetria{
     public Corrida(Corrida outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
-
-    public double caloriasCorrida(Utilizador utilizador) {
-        double calorias = calorias(utilizador);
-        return calorias * 6/5;
-    }
-
+    
     @Override
     public Atividade clone() {
         return new Corrida(this);

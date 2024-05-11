@@ -16,11 +16,6 @@ public class Flexao extends Reps{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
-    public double calcularCaloriasFlexao (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias;
-    }
-
     @Override
     public Atividade clone() {
         return new Flexao(this);

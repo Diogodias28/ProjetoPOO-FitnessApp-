@@ -15,11 +15,6 @@ public class Caminhada extends DistanciaeAltimetria{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
-    public double caloriasCaminhada(Utilizador utilizador) {
-        double calorias = calorias(utilizador);
-        return calorias * 3/5;
-    }
-
     @Override
     public Atividade clone() {
         return new Caminhada(this);

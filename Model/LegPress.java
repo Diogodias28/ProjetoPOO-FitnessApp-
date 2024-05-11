@@ -16,11 +16,6 @@ public class LegPress extends RepsPesos{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
     }
 
-    public double calcularCaloriasLegPress (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias;
-    }
-
     @Override
     public Atividade clone() {
         return new LegPress(this);

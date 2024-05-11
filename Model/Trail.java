@@ -15,11 +15,6 @@ public class Trail extends DistanciaeAltimetria{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
-    public double caloriasTrail(Utilizador utilizador) {
-        double calorias = calorias(utilizador);
-        return calorias * 4/5;
-    }
-
     @Override
     public Atividade clone() {
         return new Trail(this);

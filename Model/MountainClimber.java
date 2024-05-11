@@ -16,11 +16,6 @@ public class MountainClimber extends Reps{
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
-    public double calcularCaloriasMountainClimber (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias*6/5;
-    }
-
     @Override
     public Atividade clone() {
         return new MountainClimber(this);

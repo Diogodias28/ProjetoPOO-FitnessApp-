@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Abdominal extends Reps{
 
     public Abdominal(){
-        super("", "Abdominal", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
+        super("Abdominal", "Abdominal", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
     }
 
     public Abdominal(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
@@ -14,11 +14,6 @@ public class Abdominal extends Reps{
 
     public Abdominal(Abdominal outro) {
         super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
-    }
-
-    public double calcularCaloriasAbdominal (Utilizador utilizador){
-        double calorias = calorias(utilizador);
-        return calorias*3/5;
     }
 
     @Override
