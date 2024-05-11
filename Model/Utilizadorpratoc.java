@@ -9,7 +9,10 @@ class Utilizadorpratoc extends Utilizador {
 
     @Override
     public double calcularFatorCalorias() {
-        double fator = getFrequenciaCardiacaMedia2() * getDuracao();
+        double fator = 0.0;
+        for (Atividade atividade : getAtividades().values()) {
+            fator += atividade.getDificuldade().getFator() * atividade.getDuracao();
+        }
         return fator;
     }
 }

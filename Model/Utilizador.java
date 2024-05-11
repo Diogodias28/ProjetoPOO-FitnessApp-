@@ -68,7 +68,7 @@ public abstract class Utilizador {
         this.morada = outro.getMorada();
         this.email = outro.getEmail();
         this.password = outro.getPassword();
-        this.username = outro.getusername();
+        this.username = outro.getUsername();
         this.genero = outro.getGenero();
         this.altura = outro.getAltura();
         this.peso = outro.getPeso();
@@ -79,7 +79,7 @@ public abstract class Utilizador {
         this.frequenciaCardiacaMedia = getFrequenciaCardiacaMedia();
     }
 
-    public String getusername(){
+    public String getUsername(){
         return username;
     }
 
@@ -178,6 +178,14 @@ public abstract class Utilizador {
         return atividades.get(cod).clone();
     }
 
+    public double calcularTotalCalorias() {
+        double totalCalorias = 0.0;
+        for (Atividade atividade : atividades.values()) {
+            totalCalorias += atividade.calorias(this);
+        }
+        return totalCalorias;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -187,7 +195,7 @@ public abstract class Utilizador {
                 && Double.compare(that.getPeso(), getPeso()) == 0
                 && Objects.equals(getEmail(), that.getEmail())
                 && Objects.equals(getPassword(), that.getPassword())
-                && Objects.equals(getusername(), that.getusername())
+                && Objects.equals(getUsername(), that.getUsername())
                 && getGenero() == that.getGenero()
                 && Objects.equals(getData_nascimento(), that.getData_nascimento())
                 && Objects.equals(getDesporto_favorito(), that.getDesporto_favorito())
