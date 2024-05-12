@@ -7,7 +7,7 @@ public class DistanciaeAltimetria extends Atividade {
     private int altimetria;
 
     public DistanciaeAltimetria(){
-        super("", "", null, 30, Dificuldade.FACIL);
+        super("", "", null, 60, Dificuldade.FACIL);
         this.distancia = 30;
         this.altimetria = 120;
     }
@@ -42,8 +42,8 @@ public class DistanciaeAltimetria extends Atividade {
 
     @Override
     public double calorias(Utilizador utilizador) {
-        double calorias = calcularCaloriasBase(utilizador);
-        return calorias * getDificuldade().getFator() * (distancia/100) * altimetria;
+        double calorias = calcularCaloriasBase(utilizador) / 10;
+        return calorias * getDificuldade().getFator() * (distancia/altimetria);
     }
 
     public double calcularCaloriasBase(Utilizador utilizador) {

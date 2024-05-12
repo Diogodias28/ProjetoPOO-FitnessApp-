@@ -7,7 +7,7 @@ public class RepsPesos extends Atividade {
     private int peso;
 
     public RepsPesos(){
-        super("", "", null, 30, Dificuldade.FACIL);
+        super("", "", null, 60, Dificuldade.FACIL);
         this.reps = 10;
         this.peso = 20;
     }

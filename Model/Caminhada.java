@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class Caminhada extends DistanciaeAltimetria{
 
     public Caminhada(){
-        super("Caminhada", "Caminhada", null, 30, Dificuldade.FACIL, 30, 120);
+        super("Caminhada", "Caminhada", null, 60, Dificuldade.FACIL, 30, 120);
     }
 
     public Caminhada(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {

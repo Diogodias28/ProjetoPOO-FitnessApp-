@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class LegPress extends RepsPesos{
 
     public LegPress(){
-        super("LegPress", "Leg Press", null, 30, Dificuldade.MEDIO,10, 20);
+        super("LegPress", "Leg Press", null, 60, Dificuldade.MEDIO,10, 20);
     }
 
     public LegPress(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

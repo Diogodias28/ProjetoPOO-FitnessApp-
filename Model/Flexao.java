@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Flexao extends Reps{
 
     public Flexao(){
-        super("Flexao", "Flexão", null, 30, Dificuldade.MEDIO,10);
+        super("Flexao", "Flexão", null, 60, Dificuldade.MEDIO,10);
     }
 
     public Flexao(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

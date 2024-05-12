@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class AgachamentoComPeso extends RepsPesos{
 
     public AgachamentoComPeso(){
-        super("AgachamentoComPeso", "Agachamento Com Peso", null, 30, Dificuldade.DIFICIL,10, 20);
+        super("AgachamentoComPeso", "Agachamento Com Peso", null, 60, Dificuldade.DIFICIL,10, 20);
     }
 
     public AgachamentoComPeso(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

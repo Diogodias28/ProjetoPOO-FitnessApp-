@@ -5,7 +5,7 @@ public class Natacao extends Distancia{
     private Estilo estilo;
 
     public Natacao(){
-        super("Natacao","Natação", null, 30, Dificuldade.FACIL, 30);
+        super("Natacao","Natação", null, 60, Dificuldade.FACIL, 30);
         this.estilo = Estilo.COSTAS;
     }
 

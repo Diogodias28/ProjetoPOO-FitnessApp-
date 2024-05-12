@@ -6,7 +6,7 @@ public class Reps extends Atividade {
     private int reps;
 
     public Reps(){
-        super("", "", null, 30, Dificuldade.FACIL);
+        super("", "", null, 60, Dificuldade.FACIL);
         this.reps = 10;
     }
 

@@ -5,7 +5,7 @@ public class Canoagem extends Distancia{
     private double velvento;
     private double nvoltas;
     public Canoagem(){
-        super("Canoagem","Canoagem", null, 30, Dificuldade.DIFICIL, 30);
+        super("Canoagem","Canoagem", null, 60, Dificuldade.DIFICIL, 30);
     }
 
     public Canoagem(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia) {

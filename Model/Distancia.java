@@ -6,7 +6,7 @@ public class Distancia extends Atividade {
     private double distancia;
 
     public Distancia(){
-        super("", "", null, 30, Dificuldade.FACIL);
+        super("", "", null, 60, Dificuldade.FACIL);
         this.distancia = 30;
     }
 

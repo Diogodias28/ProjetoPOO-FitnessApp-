@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ElevacoesLaterais extends RepsPesos{
 
     public ElevacoesLaterais(){
-        super("ElevacoesLaterais", "Elevações Laterais", null, 30, Dificuldade.FACIL,10, 20);
+        super("ElevacoesLaterais", "Elevações Laterais", null, 60, Dificuldade.FACIL,10, 20);
     }
 
     public ElevacoesLaterais(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {

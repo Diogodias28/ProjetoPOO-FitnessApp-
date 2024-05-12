@@ -16,7 +16,7 @@ public abstract class Atividade implements Serializable {
         this.codigo = "";
         this.descricao = "";
         this.data = LocalDate.now();
-        this.duracao = 30;
+        this.duracao = 60;
         this.user = getUser();
         this.dificuldade= Dificuldade.FACIL;
         this.frequenciaCardiacaMedia = 100;

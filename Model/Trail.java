@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class Trail extends DistanciaeAltimetria{
 
     public Trail(){
-        super("Trail", "Trail", null, 30, Dificuldade.DIFICIL, 30, 120);
+        super("Trail", "Trail", null, 60, Dificuldade.DIFICIL, 30, 120);
     }
 
     public Trail(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {

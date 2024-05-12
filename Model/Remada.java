@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Remada extends RepsPesos{
 
     public Remada(){
-        super("Remada", "Remada", null, 30, Dificuldade.MEDIO,10, 20);
+        super("Remada", "Remada", null, 60, Dificuldade.MEDIO,10, 20);
     }
 
     public Remada(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
