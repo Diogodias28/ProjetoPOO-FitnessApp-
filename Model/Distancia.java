@@ -30,17 +30,17 @@ public class Distancia extends Atividade {
 
     @Override
     public double calorias(Utilizador utilizador) {
-        double calorias = calcularCaloriasBase(utilizador);
+        double calorias = calcularCaloriasBase(utilizador) / 10;
         return calorias * getDificuldade().getFator() * (distancia/100);
     }
 
     public double calcularCaloriasBase(Utilizador utilizador) {
         if (utilizador instanceof Utilizadorpro) {
-            return getFrequenciaCardiacaMedia() * getDuracao() / utilizador.getPeso();
+            return (getFrequenciaCardiacaMedia()/80) * getDuracao() / utilizador.getPeso();
         } else if (utilizador instanceof Utilizadorpratoc) {
-            return getFrequenciaCardiacaMedia() * getDuracao() * (utilizador.getPeso()/50);
+            return (getFrequenciaCardiacaMedia()/80) * getDuracao() * (utilizador.getPeso()/50);
         } else {
-            return getFrequenciaCardiacaMedia() * getDuracao();
+            return (getFrequenciaCardiacaMedia()/80) * getDuracao();
         }
     }
 

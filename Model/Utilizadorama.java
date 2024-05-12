@@ -8,7 +8,7 @@ class Utilizadorama extends Utilizador {
     }
 
     public Utilizadorama() {
-        super("", "", "", "", Genero.Outro, 0, 0, LocalDate.EPOCH,"", "");
+        super("", "", "", "", Genero.Outro, 1.80, 80, LocalDate.EPOCH,"", "");
     }
 
     public Utilizadorama(Utilizadorama outro) {

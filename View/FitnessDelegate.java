@@ -1,3 +1,4 @@
+package View;
 //controller e view
 
 import java.io.IOException;
@@ -19,7 +20,6 @@ import Model.PlanoTreino;
 import Model.Reps;
 import Model.RepsPesos;
 import Model.Utilizador;
-import View.NewMenu;
 
 public class FitnessDelegate implements Serializable {
     private Fitness model;

@@ -8,7 +8,7 @@ class Utilizadorpratoc extends Utilizador {
     }
 
     public Utilizadorpratoc() {
-        super("", "", "", "", Genero.Outro, 0, 0, LocalDate.EPOCH,"", "");
+        super("", "", "", "", Genero.Outro, 1.80, 80, LocalDate.EPOCH,"", "");
     }
 
     public Utilizadorpratoc(Utilizadorpratoc outro) {
