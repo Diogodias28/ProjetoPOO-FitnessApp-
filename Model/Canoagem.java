@@ -9,35 +9,21 @@ public class Canoagem extends Distancia{
     private String embarcacao;
 
     public Canoagem(){
-        super("Canoagem","Canoagem", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0);
-        this.direcao = 0;
-        this.velvento = 0;
-        this.nvoltas = 0;
-        this.embarcacao = "";
+        super("Canoagem","Canoagem", null, 30, Dificuldade.DIFICIL, 30);
+        this.velvento = 20;
+        this.nvoltas = 10;
     }
 
-    public Canoagem(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, double direcao, double velvento, double nvoltas, String embarcacao) {
+    public Canoagem(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, double velvento, double nvoltas) {
         super(codigo, descricao, data, duracao, dificuldade, distancia);
-        this.direcao = direcao;
         this.velvento = velvento;
         this.nvoltas = nvoltas;
-        this.embarcacao = embarcacao;
     }
 
     public Canoagem(Canoagem outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia());
-        this.direcao = outro.getDirecao();
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getdistancia());
         this.velvento = outro.getVelvento();
         this.nvoltas = outro.getNvoltas();
-        this.embarcacao = outro.getEmbarcacao();
-    }
-
-    public double getDirecao() {
-        return direcao;
-    }
-
-    public void setDirecao(Double direcao) {
-        this.direcao = direcao;
     }
 
     public double getVelvento() {
@@ -56,19 +42,11 @@ public class Canoagem extends Distancia{
         this.nvoltas = nvoltas;
     }
 
-    public String getEmbarcacao() {
-        return embarcacao;
-    }
-
-    public void setEmbarcacao(String embarcacao) {
-        this.embarcacao = embarcacao;
-    }
-
     public double caloriasCanoagem(Utilizador utilizador) {
         long idade =  ChronoUnit.YEARS.between(LocalDate.now(),
                 getUser().getData_nascimento());
-        double calorias = calorias(utilizador); //não sei se usamos utilizador como parametro ou fazemos getuser
-        return calorias*getDirecao()*idade/4;
+        double calorias = calorias(utilizador);
+        return calorias*(getVelvento()/100)*idade/4;
     }
 
     @Override
@@ -93,10 +71,8 @@ public class Canoagem extends Distancia{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Canoagem Canoagem = (Canoagem) o;
-        return Double.compare(Canoagem.getDirecao(), getDirecao()) == 0
-                && Double.compare(Canoagem.getVelvento(), getVelvento()) == 0
-                && Double.compare(Canoagem.getNvoltas(), getNvoltas()) == 0
-                && this.getEmbarcacao().equals(Canoagem.getEmbarcacao());
+        return Double.compare(Canoagem.getVelvento(), getVelvento()) == 0
+                && Double.compare(Canoagem.getNvoltas(), getNvoltas()) == 0;
     }
 
 }

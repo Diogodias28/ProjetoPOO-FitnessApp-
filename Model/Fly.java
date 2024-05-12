@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Fly extends RepsPesos{
 
     public Fly(){
-        super("Fly", "Fly", LocalDate.EPOCH, 0, Dificuldade.MEDIO,0, 0);
+        super("Fly", "Fly", null, 30, Dificuldade.MEDIO,10, 20);
     }
 
     public Fly(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
@@ -13,7 +13,7 @@ public class Fly extends RepsPesos{
     }
 
     public Fly(Fly outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
     }
 
     @Override

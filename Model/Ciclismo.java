@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class Ciclismo extends DistanciaeAltimetria{
 
     public Ciclismo(){
-        super("Ciclismo", "Ciclcismo", LocalDate.EPOCH, 0, Dificuldade.MEDIO, 0, 0);
+        super("Ciclismo", "Ciclismo", null, 30, Dificuldade.MEDIO, 30, 120);
     }
 
     public Ciclismo(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
@@ -12,7 +12,7 @@ public class Ciclismo extends DistanciaeAltimetria{
     }
 
     public Ciclismo(Ciclismo outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
     @Override

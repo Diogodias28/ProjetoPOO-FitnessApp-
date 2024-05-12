@@ -6,7 +6,7 @@ public class Distancia extends Atividade {
     private double distancia;
 
     public Distancia(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL);
+        super("", "", null, 0, Dificuldade.FACIL);
         this.distancia = 0;
     }
 

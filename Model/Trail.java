@@ -4,7 +4,7 @@ import java.time.LocalDate;
 public class Trail extends DistanciaeAltimetria{
 
     public Trail(){
-        super("Trail", "Trail", LocalDate.EPOCH, 0, Dificuldade.DIFICIL, 0, 0);
+        super("Trail", "Trail", null, 30, Dificuldade.DIFICIL, 30, 120);
     }
 
     public Trail(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int distancia, int altimetria) {
@@ -12,7 +12,7 @@ public class Trail extends DistanciaeAltimetria{
     }
 
     public Trail(Trail outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getdistancia(), outro.getaltimetria());
     }
 
     @Override

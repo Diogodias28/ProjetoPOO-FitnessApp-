@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class MountainClimber extends Reps{
 
     public MountainClimber(){
-        super("MountainClimber", "Mountain Climber", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
+        super("MountainClimber", "Mountain Climber", null, 30, Dificuldade.DIFICIL,10);
     }
 
     public MountainClimber(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
@@ -13,7 +13,7 @@ public class MountainClimber extends Reps{
     }
 
     public MountainClimber(MountainClimber outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
     @Override

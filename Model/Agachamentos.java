@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Agachamentos extends Reps{
 
     public Agachamentos(){
-        super("Agachamentos", "Agachamentos", LocalDate.EPOCH, 0, Dificuldade.FACIL,0);
+        super("Agachamentos", "Agachamentos", null, 30, Dificuldade.FACIL,10);
     }
 
     public Agachamentos(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
@@ -13,7 +13,7 @@ public class Agachamentos extends Reps{
     }
 
     public Agachamentos(Agachamentos outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
     @Override

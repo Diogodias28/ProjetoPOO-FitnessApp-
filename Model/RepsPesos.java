@@ -7,7 +7,7 @@ public class RepsPesos extends Atividade {
     private int peso;
 
     public RepsPesos(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL);
+        super("", "", null, 0, Dificuldade.FACIL);
         this.reps = 0;
     }
 

@@ -1,18 +1,19 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 
-public class PlanoTreino {
+public class PlanoTreino implements Serializable{
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private List<Atividade> atividades;
     private Utilizador user;
 
     public PlanoTreino() {
-        this.dataInicio = LocalDate.ofEpochDay(0);
-        this.dataFim = LocalDate.ofEpochDay(0);
+        this.dataInicio = null;
+        this.dataFim = null;
         this.atividades = new ArrayList<>();
         this.user = getUser();
     }
@@ -71,16 +72,34 @@ public class PlanoTreino {
         if (atividades.isEmpty()) {
             return null;
         }
-
-        return atividades.get(0).getData();
+    
+        LocalDate menorData = atividades.get(0).getData();
+    
+        for (Atividade atividade : atividades) {
+            LocalDate dataAtividade = atividade.getData();
+            if (dataAtividade.isBefore(menorData)) {
+                menorData = dataAtividade;
+            }
+        }
+    
+        return menorData;
     }
 
     public LocalDate calcularDataUltimaAtividade(List<Atividade> atividades) {
         if (atividades.isEmpty()) {
             return null;
         }
-        int index = atividades.size();
-        return atividades.get(index).getData();
+
+        LocalDate maiorData = atividades.get(0).getData();
+
+        for (Atividade atividade : atividades) {
+            LocalDate dataAtividade = atividade.getData();
+            if (dataAtividade.isAfter(maiorData)) {
+                maiorData = dataAtividade;
+            }
+        }
+
+        return maiorData;
     }
 
     public double calcularTotalCaloriasPT(List<Atividade> atividades, Utilizador utilizador) {

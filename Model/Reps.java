@@ -6,7 +6,7 @@ public class Reps extends Atividade {
     private int reps;
 
     public Reps(){
-        super("", "", LocalDate.EPOCH, 0, Dificuldade.FACIL);
+        super("", "", null, 0, Dificuldade.FACIL);
         this.reps = 0;
     }
 

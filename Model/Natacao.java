@@ -5,7 +5,7 @@ public class Natacao extends Distancia{
     private Estilo estilo;
 
     public Natacao(){
-        super("Natacao","Natação", LocalDate.EPOCH, 0, Dificuldade.FACIL, 0);
+        super("Natacao","Natação", null, 30, Dificuldade.FACIL, 30);
         this.estilo = Estilo.COSTAS;
     }
 
@@ -15,7 +15,7 @@ public class Natacao extends Distancia{
     }
 
     public Natacao(Natacao outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getdistancia());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getdistancia());
         this.estilo = outro.getestilo();
     }
 

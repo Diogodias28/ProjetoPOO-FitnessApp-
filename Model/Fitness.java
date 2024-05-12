@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,6 +32,14 @@ public class Fitness implements Serializable{ //este é o nosso model
 
     public int quantosUtilizadores(){
         return utilizadores.size();
+    }
+
+    public int quantosPlanos(Utilizador utilizador){
+        return utilizador.getPlanosTreino().size();
+    }
+
+    public int quantasAtividades(Utilizador utilizador){
+        return utilizador.getAtividades().size();
     }
 
     public boolean ExisteUtilizador(String username) {
@@ -139,7 +148,7 @@ public class Fitness implements Serializable{ //este é o nosso model
         utilizadores.remove(username);
     }
 
-    public List<Atividade> getAllActivitiesOfUser(String username) {
+    public List<Atividade> getAllAtividadesdeumUtilizador(String username) {
         Utilizador utilizador = utilizadores.get(username);
         if (utilizador != null) {
             return new ArrayList<>(utilizador.getAtividades().values());
@@ -169,8 +178,7 @@ public class Fitness implements Serializable{ //este é o nosso model
         return allActivities;
     }
 
-    // Method to retrieve all usernames and their corresponding number of activities
-    public Map<String, Integer> getUserActivityCounts() {
+    public Map<String, Integer> getUserNumerodeAtividades() {
         Map<String, Integer> userActivityCounts = new HashMap<>();
         for (Map.Entry<String, Utilizador> entry : utilizadores.entrySet()) {
             String username = entry.getKey();
@@ -180,76 +188,104 @@ public class Fitness implements Serializable{ //este é o nosso model
         return userActivityCounts;
     }
 
-    public PlanoTreino criarPlanodeTreino(Utilizador utilizador, int recorrencia, List<Atividade> atividadesDisponiveis, Dificuldade dificuldade) {
-        LocalDate dataInicioSemana = LocalDate.now().with(DayOfWeek.MONDAY);
+    public PlanoTreino criarPlanodeTreino(Utilizador utilizador, int recorrencia, Dificuldade dificuldade) {
+        LocalDate hoje = LocalDate.now();
+        LocalDate proximaSegunda = hoje.plusWeeks(1).with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         PlanoTreino planoTreino = new PlanoTreino();
-
+    
         Map<LocalDate, Integer> atividadesPorDia = new HashMap<>();
-
         List<LocalDate> diasDisponiveis = new ArrayList<>();
-
-        for (int i = 0; i < 7; i++) {
-            diasDisponiveis.add(dataInicioSemana.plusDays(i));
-            atividadesPorDia.put(dataInicioSemana.plusDays(i), 0);
-        }
-
-        for (Atividade atividade : atividadesDisponiveis) {
-            if (atividade.getDificuldade().equals(dificuldade)) {
-                LocalDate diaDisponivel = encontrarDiaDisponivel(atividadesPorDia, diasDisponiveis, dificuldade);
-                
-                if (diaDisponivel != null) {
-                    atividade.setData(diaDisponivel);
-                    utilizador.addAtividade(atividade.clone());
-                    atividadesPorDia.put(diaDisponivel, atividadesPorDia.get(diaDisponivel) + 1);
-                    planoTreino.adicionarAtividade(atividade.clone());
+        inicializarDiasDisponiveis(proximaSegunda, atividadesPorDia, diasDisponiveis);
+    
+        for (Atividade atividade : atividades) {
+            try {
+                if (atividade.getDificuldade().equals(dificuldade)) {
+                    LocalDate diaDisponivel = encontrarDiaDisponivel(atividadesPorDia, diasDisponiveis, atividade.getDificuldade(), proximaSegunda);
+    
+                    if (diaDisponivel != null) {
+                        realizarAtividade(utilizador, atividadesPorDia, planoTreino, atividade, diaDisponivel, proximaSegunda);
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("Erro ao processar atividade: " + e.getMessage());
             }
         }
+    
+        LocalDate dataInicio = planoTreino.calcularDataPrimeiraAtividade(planoTreino.getAtividades());
+        LocalDate dataFim = planoTreino.calcularDataUltimaAtividade(planoTreino.getAtividades());
+        planoTreino.setDataInicio(dataInicio);
+        planoTreino.setDataFim(dataFim);
+    
+        utilizador.adicionarPlanoTreino(planoTreino);
+    
+        System.out.println("Plano de treino criado com sucesso!");
+    
         return planoTreino;
-    }
+    }    
 
-    public PlanoTreino criarPlanodeTreinoPorTipo(Utilizador utilizador, int recorrencia, List<Atividade> atividadesDisponiveis, Class<? extends Atividade> tipoAtividade) {
-        LocalDate dataInicioSemana = LocalDate.now().with(DayOfWeek.MONDAY);
+    public PlanoTreino criarPlanodeTreinoPorTipo(Utilizador utilizador, int recorrencia, String tipoAtividade) {
+        LocalDate hoje = LocalDate.now();
+        LocalDate proximaSegunda = hoje.plusWeeks(1).with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         PlanoTreino planoTreino = new PlanoTreino();
-
+        
         Map<LocalDate, Integer> atividadesPorDia = new HashMap<>();
-
         List<LocalDate> diasDisponiveis = new ArrayList<>();
-
-        for (int i = 0; i < 7; i++) {
-            diasDisponiveis.add(dataInicioSemana.plusDays(i));
-            atividadesPorDia.put(dataInicioSemana.plusDays(i), 0);
+        inicializarDiasDisponiveis(proximaSegunda, atividadesPorDia, diasDisponiveis);
+        
+        Class<? extends Atividade> classeAtividade = mapearClasseAtividade(tipoAtividade);
+        if (classeAtividade == null) {
+            System.out.println("Tipo de atividade inválido: " + tipoAtividade);
+            return null;
         }
-
-        for (Atividade atividade : atividadesDisponiveis) {
-            if (tipoAtividade.isInstance(atividade)) {
-                Dificuldade dificuldade = atividade.getDificuldade();
-                LocalDate diaDisponivel = encontrarDiaDisponivel(atividadesPorDia, diasDisponiveis, dificuldade);
-
-                if (diaDisponivel != null) {
-                    atividade.setData(diaDisponivel);
-                    utilizador.addAtividade(atividade.clone());
-                    atividadesPorDia.put(diaDisponivel, atividadesPorDia.get(diaDisponivel) + 1);
-                    planoTreino.adicionarAtividade(atividade.clone());
+    
+        for (Atividade atividade : atividades) {
+            try {
+                if (classeAtividade.isInstance(atividade)) {
+                    LocalDate diaDisponivel = encontrarDiaDisponivel(atividadesPorDia, diasDisponiveis, atividade.getDificuldade(), proximaSegunda);
+            
+                    if (diaDisponivel != null) {
+                        realizarAtividade(utilizador, atividadesPorDia, planoTreino, atividade, diaDisponivel, proximaSegunda);
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("Erro ao processar atividade: " + e.getMessage());
             }
         }
+        
+        LocalDate dataInicio = planoTreino.calcularDataPrimeiraAtividade(planoTreino.getAtividades());
+        LocalDate dataFim = planoTreino.calcularDataUltimaAtividade(planoTreino.getAtividades());
+        planoTreino.setDataInicio(dataInicio);
+        planoTreino.setDataFim(dataFim);
+        
+        utilizador.adicionarPlanoTreino(planoTreino);
+        
+        System.out.println("Plano de treino criado com sucesso!");
+    
         return planoTreino;
     }
-
-    private LocalDate encontrarDiaDisponivel(Map<LocalDate, Integer> atividadesPorDia, List<LocalDate> diasDisponiveis, Dificuldade dificuldade) {
+    
+    private LocalDate encontrarDiaDisponivel(Map<LocalDate, Integer> atividadesPorDia, List<LocalDate> diasDisponiveis, Dificuldade dificuldade, LocalDate proximaSegunda) {
         Collections.shuffle(diasDisponiveis);
-
-        // Iterar sobre os dias disponíveis para encontrar o primeiro dia com espaço para mais atividades
+        
         for (LocalDate dia : diasDisponiveis) {
-            int atividadesRealizadas = atividadesPorDia.get(dia);
-            int limiteDiario = calcularLimiteDiario(dificuldade);
-
-            if (atividadesRealizadas < limiteDiario) {
-                return dia;
+            if (dia.isEqual(proximaSegunda) || dia.isAfter(proximaSegunda)) {
+                int atividadesRealizadas = atividadesPorDia.getOrDefault(dia, 0);
+                int limiteDiario = calcularLimiteDiario(dificuldade);
+        
+                if (atividadesRealizadas < limiteDiario) {
+                    return dia;
+                }
             }
         }
         return null;
+    }
+    
+    private void inicializarDiasDisponiveis(LocalDate dataInicioSemana, Map<LocalDate, Integer> atividadesPorDia, List<LocalDate> diasDisponiveis) {
+        for (int i = 0; i < 7; i++) {
+            LocalDate dia = dataInicioSemana.plusDays(i);
+            diasDisponiveis.add(dia);
+            atividadesPorDia.put(dia, 0);
+        }
     }
 
     private int calcularLimiteDiario(Dificuldade dificuldade) {
@@ -264,6 +300,34 @@ public class Fitness implements Serializable{ //este é o nosso model
                 return 1;
         }
     }
+    
+    private Class<? extends Atividade> mapearClasseAtividade(String tipoAtividade) {
+        switch (tipoAtividade) {
+            case "Distancia":
+                return Distancia.class;
+            case "Distancia e altimetria":
+                return DistanciaeAltimetria.class;
+            case "Repeticoes":
+                return Reps.class;
+            case "Repeticoes com pesos":
+                return RepsPesos.class;
+            default:
+                return null;
+        }
+    }
+    
+    private void realizarAtividade(Utilizador utilizador, Map<LocalDate, Integer> atividadesPorDia, PlanoTreino planoTreino, Atividade atividade, LocalDate diaDisponivel, LocalDate proximaSegunda) {
+        if (diaDisponivel != null && (diaDisponivel.isEqual(proximaSegunda) || diaDisponivel.isAfter(proximaSegunda))) {
+            atividade.setData(diaDisponivel);
+        
+            utilizador.addAtividade(atividade.clone());
+        
+            atividadesPorDia.put(diaDisponivel, atividadesPorDia.getOrDefault(diaDisponivel, 0) + 1);
+        
+            planoTreino.adicionarAtividade(atividade.clone());
+        }
+    }
+    
 
     public double realizarAtividade(Utilizador utilizador, Atividade atividade) {
         double caloriasGastas = atividade.calorias(utilizador);
@@ -380,11 +444,11 @@ public class Fitness implements Serializable{ //este é o nosso model
         return calcularAltimetriaTotalUtilizador(LocalDate.MIN, LocalDate.now(), utilizador);
     }
 
-    public static PlanoTreino encontrarPlanoMaisExigente(List<Utilizador> utilizadores) {
+    public PlanoTreino encontrarPlanoMaisExigente() {
         PlanoTreino planoMaisExigente = null;
         double maxCalorias = Double.MIN_VALUE;
         
-        for (Utilizador utilizador : utilizadores) {
+        for (Utilizador utilizador : utilizadores.values()) {
             for (PlanoTreino plano : utilizador.getPlanosTreino()) {
                 double caloriasGastas = plano.calcularTotalCaloriasPT(plano.getAtividades(), utilizador);
                 if (caloriasGastas > maxCalorias) {
@@ -463,7 +527,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     public void toCSV(String filename) {
         try (PrintWriter pw = new PrintWriter(filename)) {
             utilizadores.values().forEach(
-                u -> getAllActivitiesOfUser(u.getusername()).forEach(
+                u -> getAllAtividadesdeumUtilizador(u.getusername()).forEach(
                     a -> pw.println(a.toString())
                 )
             );
@@ -472,9 +536,30 @@ public class Fitness implements Serializable{ //este é o nosso model
         }
     }
 
-    public void avancarTempo(int dias) {
-        LocalDate novaData = LocalDate.now().plusDays(dias);
-        // Atualizar todas as atividades agendadas, estatísticas, etc. de acordo com a nova data
+    public void avancarAteDataEspecifica(int dias) {
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataEspecifica = dataAtual.plusDays(dias);
+    
+        while (!dataAtual.isAfter(dataEspecifica)) {
+            realizarAtividades(dataAtual);
+            dataAtual = dataAtual.plusDays(1);
+        }
+    }
+    
+    private void realizarAtividades(LocalDate data) {
+        System.out.println("Realizando atividades para " + data);
+    
+        for (Utilizador utilizador : utilizadores.values()) {
+            Map<String, Atividade> atividadesUtilizador = utilizador.getAtividades();
+            for (Atividade atividade : atividadesUtilizador.values()) {
+                if (atividade.getData().isEqual(data)) {
+
+                    System.out.println("Realizando atividade: " + atividade);
+                    double caloriasGastas = realizarAtividade(utilizador, atividade);
+                    System.out.println("Calorias gastas: " + caloriasGastas);
+                }
+            }
+        }
     }
 }
 //todos os métodos importantes: setuser, adduser, getallatividades... CriarUtilizador, quantosutilizadores

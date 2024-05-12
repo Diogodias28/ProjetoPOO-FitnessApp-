@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class CurlBicep extends RepsPesos{
 
     public CurlBicep(){
-        super("CurlBicep", "Curl Bicep", LocalDate.EPOCH, 0, Dificuldade.FACIL,0, 0);
+        super("CurlBicep", "Curl Bicep", null, 30, Dificuldade.FACIL,10, 20);
     }
 
     public CurlBicep(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps, int peso) {
@@ -13,7 +13,7 @@ public class CurlBicep extends RepsPesos{
     }
 
     public CurlBicep(CurlBicep outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getreps(), outro.getpeso());
     }
 
     @Override

@@ -15,11 +15,11 @@ public abstract class Atividade implements Serializable {
     public Atividade() {
         this.codigo = "";
         this.descricao = "";
-        this.data = LocalDate.ofEpochDay(0);
-        this.duracao = 0;
+        this.data = LocalDate.now();
+        this.duracao = 30;
         this.user = getUser();
         this.dificuldade= Dificuldade.FACIL;
-        this.frequenciaCardiacaMedia = 0;
+        this.frequenciaCardiacaMedia = 100;
     }
 
     public Atividade(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade) {

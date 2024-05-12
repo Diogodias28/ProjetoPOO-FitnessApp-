@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Burpees extends Reps{
 
     public Burpees(){
-        super("Burpees", "Burpees", LocalDate.EPOCH, 0, Dificuldade.DIFICIL,0);
+        super("Burpees", "Burpees", null, 30, Dificuldade.DIFICIL,10);
     }
 
     public Burpees(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {
@@ -13,7 +13,7 @@ public class Burpees extends Reps{
     }
 
     public Burpees(Burpees outro) {
-        super(outro.getCodigo(), outro.getDescricao(), LocalDate.EPOCH, outro.getDuracao(), outro.getDificuldade(), outro.getreps());
+        super(outro.getCodigo(), outro.getDescricao(), outro.getData(), outro.getDuracao(), outro.getDificuldade(), outro.getreps());
     }
 
     @Override

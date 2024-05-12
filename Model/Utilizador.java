@@ -29,7 +29,7 @@ public abstract class Utilizador implements Serializable{
         this.genero = Genero.Outro;
         this.altura = 0;
         this.peso = 0;
-        this.data_nascimento = LocalDate.ofEpochDay(0);
+        this.data_nascimento = null;
         this.desporto_favorito = "";
         this.tipo_atleta = "";
         this.atividades = new HashMap<>();
