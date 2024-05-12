@@ -27,12 +27,13 @@ public class FitnessDelegate implements Serializable {
 
     public FitnessDelegate(){
         try{
-            this.model= Fitness.carrega("bod.obj");
+            this.model= Fitness.carrega("bd.obj");
         } 
         catch (IOException| ClassNotFoundException e){
             System.out.println(e.getMessage());
             this.model = new Fitness();
         }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> gravar()));
     }
 
     public void run(){
@@ -273,16 +274,17 @@ public class FitnessDelegate implements Serializable {
     }
 
     public void ConsultarPlanos(Utilizador utilizador) {
-        System.out.println("O utilizador " + utilizador.getusername() + " possui os seguintes planos de Treino:");
+        System.out.println("O utilizador " + utilizador.getusername() + " possui os seguintes planos de Treino por fazer:");
 
         ArrayList <PlanoTreino> planos = utilizador.getPlanosTreino();
 
         for (PlanoTreino plano : planos) {
             List<Atividade> atividades = plano.getAtividades();
-            System.out.println("Plano de treino com inicio em " + plano.getDataInicio() + " e fim em " + plano.getDataFim() + " contém as seguintes atividades:");
-            
-            for (Atividade atividade : atividades) {
-                System.out.println("- " + atividade.getDescricao() + " ("+ atividade.getData()+ ")");
+            if (plano.getDataInicio().isAfter(model.getDataAtual())) {
+                System.out.println("Plano de treino com inicio em " + plano.getDataInicio() + " e fim em " + plano.getDataFim() + " contém as seguintes atividades:");
+                for (Atividade atividade : atividades) {
+                    System.out.println("- " + atividade.getDescricao() + " ("+ atividade.getData()+ ")");
+                }
             }
         }
     }
@@ -292,6 +294,8 @@ public class FitnessDelegate implements Serializable {
         
         menu.setHandler(1, ()->CaloriasnumPeriodo());
         menu.setHandler(2, ()->CaloriasdesdeSempre());
+
+        menu.run();
     }
 
     public void CaloriasnumPeriodo() {
@@ -317,6 +321,8 @@ public class FitnessDelegate implements Serializable {
         
         menu.setHandler(1, ()->AtividadesnumPeriodo());
         menu.setHandler(2, ()->AtividadesdesdeSempre());
+
+        menu.run();
     }
 
     public void AtividadesnumPeriodo() {
@@ -348,6 +354,8 @@ public class FitnessDelegate implements Serializable {
         
         menu.setHandler(1, ()->QuilometrosnumPeriodo(utilizador));
         menu.setHandler(2, ()->QuilometrosdesdeSempre(utilizador));
+
+        menu.run();
     }
 
     public void QuilometrosnumPeriodo(Utilizador utilizador) {
@@ -373,6 +381,8 @@ public class FitnessDelegate implements Serializable {
         
         menu.setHandler(1, ()->AltimetrianumPeriodo(utilizador));
         menu.setHandler(2, ()->AltimetriasdeSempre(utilizador));
+
+        menu.run();
     }
 
     public void AltimetrianumPeriodo(Utilizador utilizador) {
@@ -406,7 +416,7 @@ public class FitnessDelegate implements Serializable {
     public void ListaAtividades(Utilizador utilizador) {
         List<Atividade> ativ = model.ListarTodasasAtividadesdeumUser();
         String username = utilizador.getusername();
-        System.out.println("O utilizador "+ username+ "realizou as seguintes atividades: ");
+        System.out.println("O utilizador "+ username+ " realizou as seguintes atividades: ");
         for (Atividade atividade : ativ) {
             System.out.println("- " + atividade.getDescricao());
         }
@@ -419,53 +429,10 @@ public class FitnessDelegate implements Serializable {
 
         model.avancarAteDataEspecifica(dias, utilizador);
     }
-    
-    /*MenuOpcoesDistancia(){
-        NewMenu menu = new NewMenu(new String[] {"Natacao", "Canoagem", "Reps", "RepsPesos"});
-
-        menu.setHandler(1, ()->MenuOpcoesDistancia());
-        menu.setHandler(2, ()->MenuOpcoesDistanciaeAltimetria());
-        menu.setHandler(3, ()->MenuOpcoesReps());
-        menu.setHandler(4, ()->MenuOpcoesRepsPesos());
-    }
-
-    MenuOpcoesDistanciaeAltimetria(){
-        NewMenu menu = new NewMenu(new String[] {"BTT", "Caminhada", "Ciclismo", "Corrida", "Trail"});
-
-        menu.setHandler(1, ()->BTT());
-        menu.setHandler(2, ()->Caminhada());
-        menu.setHandler(3, ()->Ciclismo());
-        menu.setHandler(4, ()->Corrida());
-        menu.setHandler(4, ()->Trail());
-    }
-
-    MenuOpcoesReps(){
-        NewMenu menu = new NewMenu(new String[] {"Abdominal", "Agachamentos", "Burpees", "Flexao", "MountainClimber", "Prancha"});
-
-        menu.setHandler(1, ()->Abdominal());
-        menu.setHandler(2, ()->Agachamentos());
-        menu.setHandler(3, ()->Burpees());
-        menu.setHandler(4, ()->Flexao());
-    }
-
-    MenuOpcoesRepsPesos(){
-        NewMenu menu = new NewMenu(new String[] {"CurlBicep", "ElevacoesLaterais", "Fly", "LegPress", "Remada"});
-
-        menu.setHandler(1, ()->MenuOpcoesDistancia());
-        menu.setHandler(2, ()->MenuOpcoesDistanciaeAltimetria());
-        menu.setHandler(3, ()->MenuOpcoesReps());
-        menu.setHandler(4, ()->MenuOpcoesRepsPesos());
-    }*/
-
-    private void ExisteUtilizador(){
-        System.out.println("Username: ");
-        String username = is.nextLine();
-        model.ExisteUtilizador(username);
-    }
 
     private void gravar(){
         try {
-            model.grava("bod.obj");
+            model.grava("bd.obj");
         } catch (IOException e){
             System.out.println("Erro ao gravar");
         }

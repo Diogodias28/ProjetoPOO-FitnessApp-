@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +20,13 @@ public class Fitness implements Serializable{ //este é o nosso model
     private Map <String, Utilizador> utilizadores;
     private List <Atividade> atividades;
     private Map<String, Atividade> mapaAtividades;
-    private Map <String, Comparator<Utilizador>> comparadores;
+    private LocalDate dataAtual;
 
     public Fitness() {
         utilizadores = new HashMap<>();
         atividades = atividadesDisponiveis();
         mapaAtividades = criarMapaAtividades(atividades);
-        comparadores = new HashMap<>();
+        this.dataAtual = LocalDate.now();
     }
 
     public int quantosUtilizadores(){
@@ -189,7 +188,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     }
 
     public PlanoTreino criarPlanodeTreino(Utilizador utilizador, int recorrencia, Dificuldade dificuldade) {
-        LocalDate hoje = LocalDate.now();
+        LocalDate hoje = getDataAtual();
         LocalDate proximaSegunda = hoje.plusWeeks(1).with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         PlanoTreino planoTreino = new PlanoTreino();
     
@@ -224,7 +223,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     }    
 
     public PlanoTreino criarPlanodeTreinoPorTipo(Utilizador utilizador, int recorrencia, String tipoAtividade) {
-        LocalDate hoje = LocalDate.now();
+        LocalDate hoje = getDataAtual();
         LocalDate proximaSegunda = hoje.plusWeeks(1).with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         PlanoTreino planoTreino = new PlanoTreino();
         
@@ -351,7 +350,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     }
 
     public Utilizador encontrarUtilizadorMaisCaloricoDesdeSempre() {
-        return encontrarUtilizadorMaisCaloriconumIntervalo(LocalDate.MIN, LocalDate.now());
+        return encontrarUtilizadorMaisCaloriconumIntervalo(LocalDate.MIN, getDataAtual());
     }
 
     public Utilizador encontrarUtilizadorMaisAtivo(LocalDate inicioPeriodo, LocalDate fimPeriodo) {
@@ -376,7 +375,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     }
 
     public Utilizador encontrarUtilizadorMaisAtivoDesdeSempre() {
-        return encontrarUtilizadorMaisAtivo(LocalDate.MIN, LocalDate.now());
+        return encontrarUtilizadorMaisAtivo(LocalDate.MIN, getDataAtual());
     }
 
     public String encontrarTipoAtividadeMaisRealizada() {
@@ -423,7 +422,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     }
 
     public double calcularDistanciaTotalUtilizadorDesdeSempre(Utilizador utilizador) {
-        return calcularDistanciaTotalUtilizador(LocalDate.MIN, LocalDate.now(), utilizador);
+        return calcularDistanciaTotalUtilizador(LocalDate.MIN, getDataAtual(), utilizador);
     }
     
     public int calcularAltimetriaTotalUtilizador(LocalDate inicioPeriodo, LocalDate fimPeriodo, Utilizador utilizador) {
@@ -441,7 +440,7 @@ public class Fitness implements Serializable{ //este é o nosso model
     }
 
     public int calcularAltimetriaTotalUtilizadorDesdeSempre(Utilizador utilizador) {
-        return calcularAltimetriaTotalUtilizador(LocalDate.MIN, LocalDate.now(), utilizador);
+        return calcularAltimetriaTotalUtilizador(LocalDate.MIN, getDataAtual(), utilizador);
     }
 
     public PlanoTreino encontrarPlanoMaisExigente() {
@@ -508,13 +507,16 @@ public class Fitness implements Serializable{ //este é o nosso model
     }
 
     public void avancarAteDataEspecifica(int dias, Utilizador utilizador) {
-        LocalDate dataAtual = LocalDate.now();
-        LocalDate dataEspecifica = dataAtual.plusDays(dias);
-    
-        while (!dataAtual.isAfter(dataEspecifica)) {
-            realizarAtividades(dataAtual, utilizador);
-            dataAtual = dataAtual.plusDays(1);
+        LocalDate dataEspecifica = this.dataAtual.plusDays(dias);
+
+        while (!this.dataAtual.isAfter(dataEspecifica)) {
+            realizarAtividades(this.dataAtual, utilizador);
+            this.dataAtual = this.dataAtual.plusDays(1);
         }
+    }
+
+    public LocalDate getDataAtual(){
+        return dataAtual;
     }
     
     private void realizarAtividades(LocalDate data, Utilizador utilizador) {
