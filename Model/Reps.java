@@ -6,8 +6,8 @@ public class Reps extends Atividade {
     private int reps;
 
     public Reps(){
-        super("", "", null, 0, Dificuldade.FACIL);
-        this.reps = 0;
+        super("", "", null, 30, Dificuldade.FACIL);
+        this.reps = 10;
     }
 
     public Reps(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, int reps) {

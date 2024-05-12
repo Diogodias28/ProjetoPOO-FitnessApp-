@@ -3,11 +3,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Canoagem extends Distancia{
-    private double direcao;
     private double velvento;
     private double nvoltas;
-    private String embarcacao;
-
     public Canoagem(){
         super("Canoagem","Canoagem", null, 30, Dificuldade.DIFICIL, 30);
         this.velvento = 20;
@@ -43,8 +40,7 @@ public class Canoagem extends Distancia{
     }
 
     public double caloriasCanoagem(Utilizador utilizador) {
-        long idade =  ChronoUnit.YEARS.between(LocalDate.now(),
-                getUser().getData_nascimento());
+        long idade =  ChronoUnit.YEARS.between(LocalDate.now(),getUser().getData_nascimento());
         double calorias = calorias(utilizador);
         return calorias*(getVelvento()/100)*idade/4;
     }
@@ -58,10 +54,8 @@ public class Canoagem extends Distancia{
     public String toString() {
         return "Canoagem{" +
                 super.toString()+
-                "direcao=" + direcao +
                 ", velvento=" + velvento +
                 ", nvoltas=" + nvoltas +
-                ", embarcacao='" + embarcacao + '\'' +
                 '}';
     }
 

@@ -6,8 +6,8 @@ public class Distancia extends Atividade {
     private double distancia;
 
     public Distancia(){
-        super("", "", null, 0, Dificuldade.FACIL);
-        this.distancia = 0;
+        super("", "", null, 30, Dificuldade.FACIL);
+        this.distancia = 30;
     }
 
     public Distancia(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, double distancia) {

@@ -27,8 +27,8 @@ public abstract class Utilizador implements Serializable{
         this.password = "";
         this.username = "";
         this.genero = Genero.Outro;
-        this.altura = 0;
-        this.peso = 0;
+        this.altura = 1.80;
+        this.peso = 80;
         this.data_nascimento = null;
         this.desporto_favorito = "";
         this.tipo_atleta = "";

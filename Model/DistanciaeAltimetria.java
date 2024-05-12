@@ -7,9 +7,9 @@ public class DistanciaeAltimetria extends Atividade {
     private int altimetria;
 
     public DistanciaeAltimetria(){
-        super("", "", null, 0, Dificuldade.FACIL);
-        this.distancia = 0;
-        this.altimetria = 0;
+        super("", "", null, 30, Dificuldade.FACIL);
+        this.distancia = 30;
+        this.altimetria = 120;
     }
 
     public DistanciaeAltimetria(String codigo, String descricao, LocalDate data, int duracao, Dificuldade dificuldade, double distancia, int altimetria) {

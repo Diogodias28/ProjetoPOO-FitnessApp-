@@ -75,7 +75,7 @@ public class FitnessDelegate implements Serializable {
         menu.setHandler(2, ()->MenuPlanosTreino(utilizador));
         menu.setHandler(3, ()->MenuEstatisticas(utilizador));
         menu.setHandler(4, ()->ConsultarPlanos(utilizador));
-        menu.setHandler(5, ()->SaltarTempo());
+        menu.setHandler(5, ()->SaltarTempo(utilizador));
 
         menu.setPreCondition(4, ()->model.quantosPlanos(utilizador)>0);
         
@@ -89,11 +89,11 @@ public class FitnessDelegate implements Serializable {
         String morada = is.nextLine();
         System.out.println("Email: ");
         String email = is.nextLine();
-        System.out.println("Password: ");
-        String password = is.nextLine();
         System.out.println("Username: ");
         String username = is.nextLine();
         model.ExisteUtilizador(username);
+        System.out.println("Password: ");
+        String password = is.nextLine();
         System.out.println("Género (Masculino, Feminino, Outro): ");
         String genero = is.nextLine();
         Genero generoEnum = null;
@@ -412,12 +412,12 @@ public class FitnessDelegate implements Serializable {
         }
     }
 
-    public void SaltarTempo(){
+    public void SaltarTempo(Utilizador utilizador){
         System.out.println("Indique quantos dias pretende avançar: ");
         int dias = is.nextInt();
         is.nextLine();
 
-        model.avancarAteDataEspecifica(dias);
+        model.avancarAteDataEspecifica(dias, utilizador);
     }
     
     /*MenuOpcoesDistancia(){

@@ -28,7 +28,7 @@ public abstract class Atividade implements Serializable {
         this.data = data;
         this.duracao = duracao;
         this.dificuldade= dificuldade;
-        this.frequenciaCardiacaMedia = 0;
+        this.frequenciaCardiacaMedia = 100;
     }
 
     public Atividade(Atividade outro){

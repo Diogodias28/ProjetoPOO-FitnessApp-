@@ -464,41 +464,12 @@ public class Fitness implements Serializable{ //este é o nosso model
     public List<Atividade> listarAtividadesUtilizador(Utilizador utilizador) {
         return new ArrayList<>(utilizador.getAtividades().values());
     }
-
-    /*public void grava(String Filename){
-        try{
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(Filename));
-            os.writeObject(this);
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
     
     public void grava(String Filename) throws IOException{
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(Filename));
         os.writeObject(this);
         os.close();
     }
-
-    
-    /*public static Fitness carrega(String Filename){
-        Fitness f = null;
-        ObjectInputStream is = null;
-        try{
-            is = new ObjectInputStream(
-                new FileInputStream(Filename)
-            );
-            f = (Fitness) is.readObject();
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            f = new Fitness();
-        }
-        return f;
-    }*/
 
     public static Fitness carrega(String Filename) throws IOException, ClassNotFoundException{
         Fitness f = null;
@@ -536,20 +507,19 @@ public class Fitness implements Serializable{ //este é o nosso model
         }
     }
 
-    public void avancarAteDataEspecifica(int dias) {
+    public void avancarAteDataEspecifica(int dias, Utilizador utilizador) {
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataEspecifica = dataAtual.plusDays(dias);
     
         while (!dataAtual.isAfter(dataEspecifica)) {
-            realizarAtividades(dataAtual);
+            realizarAtividades(dataAtual, utilizador);
             dataAtual = dataAtual.plusDays(1);
         }
     }
     
-    private void realizarAtividades(LocalDate data) {
+    private void realizarAtividades(LocalDate data, Utilizador utilizador) {
         System.out.println("Realizando atividades para " + data);
     
-        for (Utilizador utilizador : utilizadores.values()) {
             Map<String, Atividade> atividadesUtilizador = utilizador.getAtividades();
             for (Atividade atividade : atividadesUtilizador.values()) {
                 if (atividade.getData().isEqual(data)) {
@@ -559,7 +529,5 @@ public class Fitness implements Serializable{ //este é o nosso model
                     System.out.println("Calorias gastas: " + caloriasGastas);
                 }
             }
-        }
     }
 }
-//todos os métodos importantes: setuser, adduser, getallatividades... CriarUtilizador, quantosutilizadores
