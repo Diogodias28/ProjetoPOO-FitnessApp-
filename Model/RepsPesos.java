@@ -43,16 +43,16 @@ public class RepsPesos extends Atividade {
     @Override
     public double calorias(Utilizador utilizador) {
         double calorias = calcularCaloriasBase(utilizador);
-        return calorias * getDificuldade().getFator();
+        return calorias * getDificuldade().getFator() * peso/20;
     }
 
-    private double calcularCaloriasBase(Utilizador utilizador) {
+    public double calcularCaloriasBase(Utilizador utilizador) {
         if (utilizador instanceof Utilizadorpro) {
-            return getFrequenciaCardiacaMedia() * reps / utilizador.getPeso();
+            return (getFrequenciaCardiacaMedia()/80) * (reps/10) / utilizador.getPeso();
         } else if (utilizador instanceof Utilizadorpratoc) {
-            return getFrequenciaCardiacaMedia() * reps;
+            return (getFrequenciaCardiacaMedia()/80) * (reps/10) * (utilizador.getPeso()/50);
         } else {
-            return getFrequenciaCardiacaMedia() * reps * utilizador.getPeso();
+            return (getFrequenciaCardiacaMedia()/80) * (reps/10);
         }
     }
 

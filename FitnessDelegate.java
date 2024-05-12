@@ -225,7 +225,7 @@ public class FitnessDelegate implements Serializable {
         System.out.println("Plano de treino com inicio em " + plano.getDataInicio() + " e fim em " + plano.getDataFim() + " contém as seguintes atividades:");
         
         for (Atividade atividade : atividades) {
-            System.out.println("- " + atividade.getDescricao() + " ("+ atividade.getData()+ ")");
+            System.out.println("- " + atividade.getDescricao() + " ("+ atividade.getData()+ ", "+ atividade.calorias(utilizador)+")");
         }
     }
 
@@ -252,7 +252,7 @@ public class FitnessDelegate implements Serializable {
         System.out.println("Plano de treino com inicio em " + plano.getDataInicio() + " e fim em " + plano.getDataFim() + " contém as seguintes atividades:");
         
         for (Atividade atividade : atividades) {
-            System.out.println("- " + atividade.getDescricao() + " ("+ atividade.getData()+ ")");
+            System.out.println("- " + atividade.getDescricao() + " ("+ atividade.getData()+ ", "+ atividade.calorias(utilizador)+")");
         }
     }
 

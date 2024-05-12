@@ -519,15 +519,19 @@ public class Fitness implements Serializable{ //este é o nosso model
     
     private void realizarAtividades(LocalDate data, Utilizador utilizador) {
         System.out.println("Realizando atividades para " + data);
-    
-            Map<String, Atividade> atividadesUtilizador = utilizador.getAtividades();
-            for (Atividade atividade : atividadesUtilizador.values()) {
+        
+        List<PlanoTreino> planosTreino = utilizador.getPlanosTreino();
+        
+        for (PlanoTreino plano : planosTreino) {
+            List<Atividade> atividades = plano.getAtividades();
+            
+            for (Atividade atividade : atividades) {
                 if (atividade.getData().isEqual(data)) {
-
                     System.out.println("Realizando atividade: " + atividade);
                     double caloriasGastas = realizarAtividade(utilizador, atividade);
                     System.out.println("Calorias gastas: " + caloriasGastas);
                 }
             }
+        }
     }
 }
